@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MedRecRoomDB</string>
+    <string-array name="user_array">
+        <item></item>
+        <item>Patient</item>
+        <item>Doctor</item>
+        <item>Admin</item>
+    </string-array>
+</resources>
