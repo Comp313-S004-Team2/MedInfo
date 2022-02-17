@@ -1,1 +1,1 @@
-# MedRec
+# MedInfo
