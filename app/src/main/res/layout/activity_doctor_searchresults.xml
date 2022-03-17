@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
     <TextView
         android:id="@+id/textView2"
@@ -121,7 +121,17 @@
                 android:id="@+id/medicalTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"/>
         </TableRow>
+
+
+
     </TableLayout>
+    <Button
+        android:id="@+id/buttonAddNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="100px"
+        android:text="Add Note"/>
 </LinearLayout>
