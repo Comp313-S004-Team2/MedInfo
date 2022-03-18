@@ -1,6 +1,8 @@
 package com.example.medrecroomdb.activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ public class DoctorSearchResultsActivity extends AppCompatActivity {
     String healthcard;
     private ArrayList<MedicalRecord> medicalRecordsList;
     private RecyclerView rcv;
+    private Button noteBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,17 @@ public class DoctorSearchResultsActivity extends AppCompatActivity {
         medicalRecordsList = new ArrayList<>();
         setUserInfo();
         setAdapter();
+
+        noteBtn = (Button) findViewById(R.id.addNoteBtn);
+        noteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(getApplicationContext(), NoteActivity.class);
+                startActivity(intent2);
+            }
+        });
+
+
         try{
             Intent intent=getIntent();
             healthcard = intent.getStringExtra("healthcardNumber");
@@ -52,8 +66,11 @@ public class DoctorSearchResultsActivity extends AppCompatActivity {
                 phoneTxtView.setText(String.valueOf(patient.getPhoneNumber()));
                 emailTxtView = findViewById(R.id.pResultsCEmail);
                 emailTxtView.setText(patient.getEmail());
+
                 //medicalTxtView = findViewById(R.id.medicalTextView);
                 //medicalTxtView.setText(patient.);
+
+
             }
         }
         catch(Exception e)
