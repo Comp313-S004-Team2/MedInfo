@@ -157,9 +157,9 @@ public class PatientNavActivity extends AppCompatActivity {
         String File = Uri;
 
         Amplify.Storage.uploadFile(
-                "Upload File",
+                "Upload File from Patient",
                 new File(File),
-                result -> Toast.makeText(this, "File has Successfully Uploaded:", Toast.LENGTH_SHORT).show(),
+                result -> Toast.makeText(this, "File has Successfully Uploaded: " + result.getKey(), Toast.LENGTH_SHORT).show(),
                 error -> Log.e("MyAmplifyApp", "Upload failed", error)
 
         );

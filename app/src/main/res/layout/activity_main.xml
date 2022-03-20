@@ -137,11 +137,6 @@
                 android:textColor="#FBFAFA"
                 android:textSize="16sp" />
 
-            <Button
-                android:id="@+id/uploadBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Upload S3" />
         </TableRow>
 
     </TableLayout>
