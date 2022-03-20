@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class DoctorSearchResultsActivity extends AppCompatActivity {
 
     private PatientViewModel patientViewModel;
-    private TextView fNameTxtView, lNameTxtView, addrTxtView, healthcardTxtView, phoneTxtView, emailTxtView, medicalTxtView;
+    private TextView fNameTxtView, lNameTxtView, addrTxtView, healthcardTxtView, phoneTxtView, emailTxtView, medicalTxtView,notesTxtView;
     Patient patient;
     String healthcard;
     private ArrayList<MedicalRecord> medicalRecordsList;
@@ -48,6 +48,8 @@ public class DoctorSearchResultsActivity extends AppCompatActivity {
 
         try{
             Intent intent=getIntent();
+            Intent receiverNotes = getIntent();
+            String receivedNotesValue = receiverNotes.getStringExtra("AddNotes");
             healthcard = intent.getStringExtra("healthcardNumber");
             patientViewModel = ViewModelProviders.of(this).get(PatientViewModel.class);
             patient = patientViewModel.findByHealthcardNumber(healthcard);
@@ -65,17 +67,25 @@ public class DoctorSearchResultsActivity extends AppCompatActivity {
                 phoneTxtView.setText(String.valueOf(patient.getPhoneNumber()));
                 emailTxtView = findViewById(R.id.pResultsCEmail);
                 emailTxtView.setText(patient.getEmail());
-
                 //medicalTxtView = findViewById(R.id.medicalTextView);
                 //medicalTxtView.setText(patient.);
-
-
             }
+            notesTxtView = (TextView) findViewById(R.id.textView33);
+            notesTxtView.setText(receivedNotesValue);
+
         }
         catch(Exception e)
         {
             Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
         }
+        ///    private void setUserNotes(){
+////
+////notesTxtView = findViewById(R.id.boxEditNotes);
+////notesTxtView.setText(boxEditNotes);
+//String notesAdd = getIntent().getStringExtra("notes"); //change here
+//    notesTxtView = findViewById(R.id.boxEditNotes);
+//                notesTxtView.setText(notesAdd); //change here
+////    }
 
     }
 
@@ -88,9 +98,10 @@ public class DoctorSearchResultsActivity extends AppCompatActivity {
     }
 
     private void setUserInfo() {
-        medicalRecordsList.add(new MedicalRecord("Record 1 - Date: 08/21"));
-        medicalRecordsList.add(new MedicalRecord("Record 2 - Date: 09/21" ));
-        medicalRecordsList.add(new MedicalRecord("Record 3 - Date: 10/21"));
+        medicalRecordsList.add(new MedicalRecord("Record 1 - Date: October 10, 2021"));
+        medicalRecordsList.add(new MedicalRecord("Record 2 - Date: February 2, 2022" ));
+        medicalRecordsList.add(new MedicalRecord("Record 3 - Date: March 15, 2022"));
     }
+
 
 }

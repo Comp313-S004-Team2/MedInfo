@@ -21,6 +21,8 @@ public abstract class MedRecDb extends RoomDatabase {
     public abstract PatientDao patientDao();
     public abstract DoctorDao doctorDao();
     public abstract AdminDao adminDao();
+    // To use in the future for the local database.
+    // public abstract NotesDao notesDao();
     //
     public static synchronized MedRecDb getInstance(Context context) {
         if (INSTANCE == null) {
