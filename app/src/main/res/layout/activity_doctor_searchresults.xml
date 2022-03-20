@@ -124,16 +124,6 @@
                 android:layout_marginLeft="10dp"/>
         </TableRow>
 
-
-
     </TableLayout>
-    <Button
-        android:id="@+id/addNoteBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="100px"
-        android:onClick="addNote"
-        android:text="Add Note"/>
 
 </LinearLayout>

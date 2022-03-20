@@ -37,15 +37,14 @@ public class DoctorSearchResultsActivity extends AppCompatActivity {
         setUserInfo();
         setAdapter();
 
-        /*noteBtn = (Button) findViewById(R.id.addNoteBtn);
+        noteBtn = (Button) findViewById(R.id.btnAddNote);
         noteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent2 = new Intent(getApplicationContext(), NoteActivity.class);
                 startActivity(intent2);
             }
-        });*/
-
+        });
 
         try{
             Intent intent=getIntent();
@@ -92,12 +91,6 @@ public class DoctorSearchResultsActivity extends AppCompatActivity {
         medicalRecordsList.add(new MedicalRecord("Record 1 - Date: 08/21"));
         medicalRecordsList.add(new MedicalRecord("Record 2 - Date: 09/21" ));
         medicalRecordsList.add(new MedicalRecord("Record 3 - Date: 10/21"));
-    }
-
-    // Starting Note service
-    public void addNote() {
-        Toast.makeText(getApplicationContext(), "testing 1", Toast.LENGTH_SHORT).show();
-        Toast.makeText(getApplicationContext(), "testing 2", Toast.LENGTH_SHORT).show();
     }
 
 }
