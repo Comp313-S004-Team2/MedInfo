@@ -198,7 +198,7 @@
         android:layout_margin="5dp" />
 
     <TextView
-        android:text="Patients - Dev Table to Show Patients"
+        android:text="Patients List"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

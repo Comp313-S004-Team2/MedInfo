@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MedRecRoomDB</string>
+    <string name="app_name">MedInfo Application</string>
     <string-array name="user_array">
         <item></item>
         <item>Patient</item>

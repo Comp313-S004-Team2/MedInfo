@@ -12,7 +12,7 @@
         android:id="@+id/imageView"
         android:layout_width="181dp"
         android:layout_height="130dp"
-        app:srcCompat="@drawable/ic_medrec_logo"
+        app:srcCompat="@drawable/ic_medinfo_logo"
         tools:ignore="ImageContrastCheck" />
 
     <TextView
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="20dp"
-        android:text="MedRec"
+        android:text="MedInfo"
         android:textSize="24sp"
         android:textStyle="bold" />
 
