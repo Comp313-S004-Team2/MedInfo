@@ -133,5 +133,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="100px"
+        android:onClick="addNote"
         android:text="Add Note"/>
+
 </LinearLayout>
