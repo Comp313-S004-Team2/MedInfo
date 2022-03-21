@@ -184,7 +184,7 @@ public class DoctorSearchResultsActivity extends AppCompatActivity {
         String File = Uri;
 
         Amplify.Storage.uploadFile(
-                "Med History From Doctor",
+                "Med History From Doctor Dirk Brandon",
                 new File(File),
                 result -> Toast.makeText(this, "File has Successfully Uploaded:" + result.getKey(), Toast.LENGTH_SHORT).show(),
                 error -> Log.e("MyAmplifyApp", "Upload failed", error)

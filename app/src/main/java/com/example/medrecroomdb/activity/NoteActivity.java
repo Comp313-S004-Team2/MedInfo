@@ -41,8 +41,6 @@ public class NoteActivity extends AppCompatActivity {
                 // startActivity(intent2); // original code
                 */
                 //
-                Intent intent2 = new Intent(getApplicationContext(), DoctorSearchResultsActivity.class);
-                startActivity(intent2);
             }
         });
 
