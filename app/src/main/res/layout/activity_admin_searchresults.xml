@@ -121,11 +121,6 @@
 
     <Button
         android:id="@+id/btnAdminSearchResultsUpdateUser"
-<<<<<<< HEAD
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Update" />
-=======
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:text="Update"
@@ -143,5 +138,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/rcvPatient"
         app:layout_constraintVertical_bias="0.635" />
->>>>>>> aiturgan_br
 </LinearLayout>

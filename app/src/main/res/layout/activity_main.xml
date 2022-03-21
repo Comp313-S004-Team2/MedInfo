@@ -12,11 +12,7 @@
         android:id="@+id/imageView"
         android:layout_width="181dp"
         android:layout_height="130dp"
-<<<<<<< HEAD
         app:srcCompat="@drawable/ic_medinfo_logo"
-=======
-        app:srcCompat="@drawable/ic_medrec_logo"
->>>>>>> aiturgan_br
         tools:ignore="ImageContrastCheck" />
 
     <TextView
@@ -140,10 +136,6 @@
                 android:text="Sign up"
                 android:textColor="#FBFAFA"
                 android:textSize="16sp" />
-<<<<<<< HEAD
-=======
-
->>>>>>> aiturgan_br
         </TableRow>
 
     </TableLayout>

@@ -18,8 +18,6 @@ public class NoteActivity extends AppCompatActivity {
     Patient patient;
     private Button confirmNoteBtn;
     private EditText patientNotes;
-
-    private Button confirmNoteBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

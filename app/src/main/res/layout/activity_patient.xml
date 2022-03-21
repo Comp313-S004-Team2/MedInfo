@@ -198,11 +198,7 @@
         android:layout_margin="5dp" />
 
     <TextView
-<<<<<<< HEAD
         android:text="Patients List"
-=======
-        android:text="Patients - Dev Table to Show Patients"
->>>>>>> aiturgan_br
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
