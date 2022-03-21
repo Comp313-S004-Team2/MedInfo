@@ -15,7 +15,7 @@ import com.example.medrecroomdb.model.Patient;
 
 import java.util.List;
 
-public class PatientRepository {
+public class    PatientRepository {
     private final PatientDao patientDao;
     private MutableLiveData<Integer> insertResult = new MutableLiveData<>();
     private LiveData<List<Patient>> patientList;

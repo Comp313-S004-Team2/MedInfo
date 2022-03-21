@@ -18,12 +18,14 @@ public class NoteActivity extends AppCompatActivity {
     Patient patient;
     private Button confirmNoteBtn;
     private EditText patientNotes;
+
+    private Button confirmNoteBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
 
-//        notes = findViewById(R.id.boxEditNotes);// change 1
+        //notes = findViewById(R.id.boxEditNotes);// change 1
         patientNotes = (EditText) findViewById(R.id.boxEditNotes); // change 2
         confirmNoteBtn = (Button) findViewById(R.id.confirmBtn);
         confirmNoteBtn.setOnClickListener(new View.OnClickListener() {
@@ -31,19 +33,20 @@ public class NoteActivity extends AppCompatActivity {
             public void onClick(View view) {
                 /* change here */
 
-            Intent addNotesIntent = new Intent(view.getContext(), DoctorSearchResultsActivity.class);
-            addNotesIntent.putExtra("AddNotes",patientNotes.getText().toString());
-            startActivity(addNotesIntent);
-            /* Original code is here
-//                String notesAdd = notes.getText().toString(); // change 2
-//                Intent intent2 = new Intent(getApplicationContext(), DoctorSearchResultsActivity.class); // original code
-//                intent2.putExtra("notes", notesAdd);//change here
-//                startActivity(intent2); // original code
-*/
-//
+                Intent addNotesIntent = new Intent(view.getContext(), DoctorSearchResultsActivity.class);
+                addNotesIntent.putExtra("AddNotes",patientNotes.getText().toString());
+                startActivity(addNotesIntent);
+                /* Original code is here
+                //String notesAdd = notes.getText().toString(); // change 2
+                //Intent intent2 = new Intent(getApplicationContext(), DoctorSearchResultsActivity.class); // original code
+                //intent2.putExtra("notes", notesAdd);//change here
+                // startActivity(intent2); // original code
+                */
+                //
+                Intent intent2 = new Intent(getApplicationContext(), DoctorSearchResultsActivity.class);
+                startActivity(intent2);
             }
         });
-
 
     }
 }

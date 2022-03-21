@@ -1,10 +1,20 @@
 package com.example.medrecroomdb;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,6 +23,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 import com.example.medrecroomdb.activity.AdminActivity;
 import com.example.medrecroomdb.activity.DoctorActivity;
 import com.example.medrecroomdb.activity.PatientActivity;
@@ -26,6 +40,8 @@ import com.example.medrecroomdb.viewmodel.AdminViewModel;
 import com.example.medrecroomdb.viewmodel.DoctorViewModel;
 import com.example.medrecroomdb.viewmodel.PatientViewModel;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     // Declare variables
@@ -35,11 +51,25 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     EditText editTextId, editTextPassword;
     Button buttonLogin;
     String role = "";
+    Button buttonUploadS3;
+    private static Uri mSelectedFileUri = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /*try {
+            Amplify.addPlugin(new AWSCognitoAuthPlugin());
+            Amplify.addPlugin(new AWSS3StoragePlugin());
+            Amplify.configure(getApplicationContext());
+            Log.i("MyAmplifyApp", "Initialized Amplify");
+        } catch (AmplifyException error) {
+            Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
+        }*/
+        Amplifyy.initializeAmplify(MainActivity.this);
+
+
 
         // Set up references
         doctorViewModel = ViewModelProviders.of(this).get(DoctorViewModel.class);
