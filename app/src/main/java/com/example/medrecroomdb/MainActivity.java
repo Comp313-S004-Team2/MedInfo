@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.DocumentMetaData;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 import com.example.medrecroomdb.activity.AdminActivity;
 import com.example.medrecroomdb.activity.DoctorActivity;
@@ -97,6 +98,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View v) {
                 try {
+                    EditText title = findViewById(R.id.txtLoginId);
+                    DocumentMetaData item = DocumentMetaData.builder()
+                            .title(title.getText().toString())
+                            .shortDescription("Lorem ipsum dolor sit amet")
+                            .uploadDate("Lorem ipsum dolor sit amet")
+                            .uploadedBy("Lorem ipsum dolor sit amet")
+                            .healthCard("Lorem ipsum dolor sit amet")
+                            .fileExtention("Lorem ipsum dolor sit amet")
+                            .build();
+                    Amplify.DataStore.save(
+                            item,
+                            success -> {
+                                //Toast.makeText(MainActivity.this, "CREATE Operation Successful", Toast.LENGTH_SHORT).show();
+                                Log.i("Amplify", "Saved item: " + success.item().getId());},
+                            error -> Log.e("Amplify", "Could not save item to DataStore", error)
+                    );
                     // get doctorId, password from EditText
                     String userName = editTextId.getText().toString();
                     String password = editTextPassword.getText().toString();
@@ -124,10 +141,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         startActivity(intentAdmin);
                     } else {
                         // Otherwise, show error message
-                        Toast.makeText(getApplicationContext(), "Invalid username/password/role", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "Invalid username/password/role", Toast.LENGTH_SHORT).show();
                     }
                 } catch(Exception e) {
-                    Toast.makeText(getApplicationContext(), "Please enter username and password.", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Please enter username and password.", Toast.LENGTH_SHORT).show();
                     System.out.print(e.getMessage());
                 }
             }

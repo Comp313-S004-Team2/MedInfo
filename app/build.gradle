@@ -52,10 +52,8 @@ dependencies {
     annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.2.0'
 
     //AWS
-
-    def aws_version = "2.16.+"
-    implementation "com.amazonaws:aws-android-sdk-s3:$aws_version"
-    implementation ("com.amazonaws:aws-android-sdk-mobile-client:$aws_version") { transitive = true }
+    implementation "com.amazonaws:aws-android-sdk-s3:2.41.0"
+    implementation ("com.amazonaws:aws-android-sdk-mobile-client:2.41.0") { transitive = true }
 
 
     // Amplify core dependency

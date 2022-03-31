@@ -1,0 +1,10 @@
+type DocumentMetaData @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  shortDescription: String!
+  uploadDate: String!
+  uploadedBy: String!
+  healthCard: String!
+  fileExtention: String!
+}
+ 
