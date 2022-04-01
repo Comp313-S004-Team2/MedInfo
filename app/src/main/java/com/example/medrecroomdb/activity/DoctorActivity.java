@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,9 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.User;
+import com.example.medrecroomdb.Amplifyy;
 import com.example.medrecroomdb.R;
 import com.example.medrecroomdb.model.Doctor;
 import com.example.medrecroomdb.viewmodel.DoctorViewModel;
@@ -37,6 +41,8 @@ public class DoctorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor);
+
+        Amplifyy.initializeAmplify(getApplicationContext());
 
         etDoctorFirstName = findViewById(R.id.txtDoctorFirstName);
         etDoctorLastName = findViewById(R.id.txtDoctorLastName);
@@ -135,24 +141,21 @@ public class DoctorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 allFieldsChecked = CheckAllFields();
                 if (allFieldsChecked) {
-                    final int random = new Random().nextInt(100000 - 1) + 100000;
-                    doctor.setDoctorId(Integer.parseInt(Integer.toString(random)));
-
-                    doctor.setFirstName(etDoctorFirstName.getText().toString());
-
-                    doctor.setLastName(etDoctorLastName.getText().toString());
-
-                    doctor.setAddress(etDoctorAddress.getText().toString());
-
-                    doctor.setPhoneNumber(Integer.parseInt(etDoctorPhoneNumber.getText().toString()));
-
-                    doctor.setEmail(etDoctorEmail.getText().toString());
-
-                    doctor.setDoctorLicenseNumber(etDoctorLicense.getText().toString());
-
-                    doctor.setPassword(etPassword.getText().toString());
-
-                    doctorViewModel.insert(doctor);
+                    User item = User.builder()
+                            .firstName(etDoctorFirstName.getText().toString())
+                            .lastName(etDoctorLastName.getText().toString())
+                            .email(etDoctorEmail.getText().toString())
+                            .address(etDoctorAddress.getText().toString())
+                            .phoneNumber(etDoctorPhoneNumber.getText().toString())
+                            .idNumber(etDoctorLicense.getText().toString())
+                            .password(etPassword.getText().toString())
+                            .role("Doctor")
+                            .build();
+                    Amplify.DataStore.save(
+                            item,
+                            success -> Log.i("Amplify", "Saved item: " + success.item().getId()),
+                            error -> Log.e("Amplify", "Could not save item to DataStore", error)
+                    );
 
                     etDoctorFirstName.setText("");
                     etDoctorLastName.setText("");

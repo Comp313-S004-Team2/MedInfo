@@ -26,7 +26,9 @@ import android.widget.Toast;
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.core.model.query.Where;
 import com.amplifyframework.datastore.generated.model.DocumentMetaData;
+import com.amplifyframework.datastore.generated.model.User;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 import com.example.medrecroomdb.activity.AdminActivity;
 import com.example.medrecroomdb.activity.DoctorActivity;
@@ -98,29 +100,31 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View v) {
                 try {
-                    EditText title = findViewById(R.id.txtLoginId);
-                    DocumentMetaData item = DocumentMetaData.builder()
-                            .title(title.getText().toString())
-                            .shortDescription("Lorem ipsum dolor sit amet")
-                            .uploadDate("Lorem ipsum dolor sit amet")
-                            .uploadedBy("Lorem ipsum dolor sit amet")
-                            .healthCard("Lorem ipsum dolor sit amet")
-                            .fileExtention("Lorem ipsum dolor sit amet")
-                            .build();
-                    Amplify.DataStore.save(
-                            item,
-                            success -> {
-                                //Toast.makeText(MainActivity.this, "CREATE Operation Successful", Toast.LENGTH_SHORT).show();
-                                Log.i("Amplify", "Saved item: " + success.item().getId());},
-                            error -> Log.e("Amplify", "Could not save item to DataStore", error)
-                    );
                     // get doctorId, password from EditText
                     String userName = editTextId.getText().toString();
                     String password = editTextPassword.getText().toString();
 
+                    Amplify.DataStore.query(User.class,
+                            Where.matches(User.EMAIL.eq(userName).and(User.PASSWORD.eq(password))),
+                            goodPosts -> {
+                                if (goodPosts.hasNext()) {
+                                    User user = goodPosts.next();
+                                    if(user.getRole() == "Doctor") {
+                                        Intent intentDoctor = new Intent(v.getContext(), DoctorSearchPatientActivity.class);
+                                        startActivity(intentDoctor);
+                                    }
+                                    else if(user.getRole() == "Patient"){
+                                        Intent intentPatient = new Intent(v.getContext(), PatientNavActivity.class);
+                                        startActivity(intentPatient);
+                                    }
+                                }
+                            },
+                            failure -> Log.e("MyAmplifyApp", "Query failed.", failure)
+                    );
+
 
                     // Set up variable doctor references of Type Doctor to find doctor by doctorId by findByDoctorId()
-                    Doctor doctor = doctorViewModel.findByDoctorEmail(userName);
+                    /*Doctor doctor = doctorViewModel.findByDoctorEmail(userName);
 
                     // Set up variable doctor references of Type Doctor to find doctor by doctorId by findByDoctorId()
                     Patient patient = patientViewModel.findByPatientEmail(userName);
@@ -141,8 +145,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         startActivity(intentAdmin);
                     } else {
                         // Otherwise, show error message
-                        //Toast.makeText(getApplicationContext(), "Invalid username/password/role", Toast.LENGTH_SHORT).show();
-                    }
+                        Toast.makeText(getApplicationContext(), "Invalid username/password/role", Toast.LENGTH_SHORT).show();
+                    }*/
                 } catch(Exception e) {
                     //Toast.makeText(getApplicationContext(), "Please enter username and password.", Toast.LENGTH_SHORT).show();
                     System.out.print(e.getMessage());
