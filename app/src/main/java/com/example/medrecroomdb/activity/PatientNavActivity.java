@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.amplifyframework.core.Amplify;
+import com.example.medrecroomdb.Appointment;
 import com.example.medrecroomdb.MainActivity;
 import com.example.medrecroomdb.R;
 import com.example.medrecroomdb.model.Patient;
@@ -105,7 +106,8 @@ public class PatientNavActivity extends AppCompatActivity {
         button_bookAppt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentViewMedRec = new Intent(v.getContext(), PatientViewMedRecActivity.class);
+                //Intent intentViewMedRec = new Intent(v.getContext(), PatientViewMedRecActivity.class);
+                Intent intentViewMedRec = new Intent(v.getContext(), Appointment.class);
                 startActivity(intentViewMedRec);
             }
         });

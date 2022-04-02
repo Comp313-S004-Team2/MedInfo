@@ -15,4 +15,13 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_appointment">Appointment</string>
+
+    <!-- Buttons' labels -->
+    <string name="lbl_ViewMedicalRecords">View Medical Records</string>
+    <string name="lbl_UpdatePersonalInformation">Update Personal Information</string>
+    <string name="lbl_ScheduleAppointment">Schedule Appointment</string>
+    <string name="lbl_UploadMedicalHistory">Upload Medical History</string>
+
+
 </resources>

@@ -27,6 +27,7 @@ import com.amplifyframework.AmplifyException;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.core.model.query.Where;
+import com.amplifyframework.datastore.generated.model.Doctor;
 import com.amplifyframework.datastore.generated.model.DocumentMetaData;
 import com.amplifyframework.datastore.generated.model.User;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
@@ -37,7 +38,7 @@ import com.example.medrecroomdb.activity.DoctorSearchPatientActivity;
 import com.example.medrecroomdb.activity.AdminSearchUserActivity;
 import com.example.medrecroomdb.activity.PatientNavActivity;
 import com.example.medrecroomdb.model.Admin;
-import com.example.medrecroomdb.model.Doctor;
+//import com.example.medrecroomdb.model.Doctor;
 import com.example.medrecroomdb.model.Patient;
 import com.example.medrecroomdb.viewmodel.AdminViewModel;
 import com.example.medrecroomdb.viewmodel.DoctorViewModel;
@@ -72,6 +73,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }*/
         Amplifyy.initializeAmplify(MainActivity.this);
 
+
+        Amplify.DataStore.query(
+                Doctor.class,
+                items -> {
+                    while (items.hasNext()) {
+                        Doctor item = (Doctor) items.next();
+                        Log.i("Amplify", "Id " + item.getId());
+                    }
+                },
+                failure -> Log.e("Amplify", "Could not query DataStore", failure)
+        );
 
 
         // Set up references
@@ -109,14 +121,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             goodPosts -> {
                                 if (goodPosts.hasNext()) {
                                     User user = goodPosts.next();
-                                    if(user.getRole() == "Doctor") {
+                                    Log.i("user", user.getRole());
+                                    if(user.getRole().matches("Doctor") ) {
                                         Intent intentDoctor = new Intent(v.getContext(), DoctorSearchPatientActivity.class);
                                         startActivity(intentDoctor);
                                     }
-                                    else if(user.getRole() == "Patient"){
+                                    /*else if(user.getRole().matches( "Patient" )){
                                         Intent intentPatient = new Intent(v.getContext(), PatientNavActivity.class);
                                         startActivity(intentPatient);
-                                    }
+                                    }*/
                                 }
                             },
                             failure -> Log.e("MyAmplifyApp", "Query failed.", failure)
