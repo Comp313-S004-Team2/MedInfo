@@ -22,9 +22,10 @@ android {
         }
     }
     compileOptions {
+        // Support for Java 8 features
         coreLibraryDesugaringEnabled true
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     buildFeatures {
         viewBinding true
@@ -57,11 +58,11 @@ dependencies {
 
 
     // Amplify core dependency
-    implementation 'com.amplifyframework:core:1.6.5'
-    implementation 'com.amplifyframework:aws-api:1.6.5'
-    implementation 'com.amplifyframework:aws-datastore:1.6.5'
-    implementation 'com.amplifyframework:aws-storage-s3:1.6.5'
-    implementation 'com.amplifyframework:aws-auth-cognito:1.6.5'
+    implementation 'com.amplifyframework:core:1.33.0'
+    implementation 'com.amplifyframework:aws-api:1.33.0'
+    implementation 'com.amplifyframework:aws-datastore:1.33.0'
+    implementation 'com.amplifyframework:aws-storage-s3:1.33.0'
+    implementation 'com.amplifyframework:aws-auth-cognito:1.33.0'
 
     // Support for Java 8 features
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'

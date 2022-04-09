@@ -53,7 +53,7 @@
     }
   },
   "storage": {
-    "s3medinfostorage97d5da4e": {
+    "s3medinfostorageed82502a": {
       "service": "S3",
       "providerPlugin": "awscloudformation",
       "dependsOn": []

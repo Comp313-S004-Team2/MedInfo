@@ -4,23 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Appointment">
+    tools:context=".activity.Appointment">
 
     <TextView
-        android:id="@+id/textView35"
+        android:id="@+id/textView37"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/lbl_ScheduleAppointment"
-        android:textAllCaps="false"
+        android:text="This is where we set appointment"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txtDoctorTest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="172dp"
-        tools:layout_editor_absoluteY="378dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

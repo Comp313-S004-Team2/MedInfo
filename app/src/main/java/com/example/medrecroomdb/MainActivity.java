@@ -27,8 +27,6 @@ import com.amplifyframework.AmplifyException;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.core.model.query.Where;
-import com.amplifyframework.datastore.generated.model.Doctor;
-import com.amplifyframework.datastore.generated.model.DocumentMetaData;
 import com.amplifyframework.datastore.generated.model.User;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 import com.example.medrecroomdb.activity.AdminActivity;
@@ -73,19 +71,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }*/
         Amplifyy.initializeAmplify(MainActivity.this);
 
-
-        Amplify.DataStore.query(
-                Doctor.class,
-                items -> {
-                    while (items.hasNext()) {
-                        Doctor item = (Doctor) items.next();
-                        Log.i("Amplify", "Id " + item.getId());
-                    }
-                },
-                failure -> Log.e("Amplify", "Could not query DataStore", failure)
-        );
-
-
         // Set up references
         doctorViewModel = ViewModelProviders.of(this).get(DoctorViewModel.class);
         patientViewModel = ViewModelProviders.of(this).get(PatientViewModel.class);
@@ -124,12 +109,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                     Log.i("user", user.getRole());
                                     if(user.getRole().matches("Doctor") ) {
                                         Intent intentDoctor = new Intent(v.getContext(), DoctorSearchPatientActivity.class);
+                                        intentDoctor.putExtra("UserId", user.getIdNumber());
+                                        intentDoctor.putExtra("Role", user.getRole());
+                                        startActivity(intentDoctor);
+                                    }else if(user.getRole().matches("Patient")){
+                                        Intent intentDoctor = new Intent(v.getContext(), PatientNavActivity.class);
+                                        intentDoctor.putExtra("UserId", user.getIdNumber());
+                                        intentDoctor.putExtra("Role", user.getRole());
                                         startActivity(intentDoctor);
                                     }
-                                    /*else if(user.getRole().matches( "Patient" )){
-                                        Intent intentPatient = new Intent(v.getContext(), PatientNavActivity.class);
-                                        startActivity(intentPatient);
-                                    }*/
                                 }
                             },
                             failure -> Log.e("MyAmplifyApp", "Query failed.", failure)
@@ -221,4 +209,5 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
 }

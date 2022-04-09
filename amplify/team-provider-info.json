@@ -1,38 +1,19 @@
 {
   "staging": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-medinfo-staging-225544-authRole",
-      "UnauthRoleArn": "arn:aws:iam::105928657418:role/amplify-medinfo-staging-225544-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::105928657418:role/amplify-medinfo-staging-225544-authRole",
+      "AuthRoleName": "amplify-medinfo-staging-195003-authRole",
+      "UnauthRoleArn": "arn:aws:iam::105928657418:role/amplify-medinfo-staging-195003-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::105928657418:role/amplify-medinfo-staging-195003-authRole",
       "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-medinfo-staging-225544-deployment",
-      "UnauthRoleName": "amplify-medinfo-staging-225544-unauthRole",
-      "StackName": "amplify-medinfo-staging-225544",
-      "StackId": "arn:aws:cloudformation:us-east-2:105928657418:stack/amplify-medinfo-staging-225544/88820b60-b07c-11ec-97bc-0a9ea0da90fe",
-      "AmplifyAppId": "d26i5l4m9dtlb9"
+      "DeploymentBucketName": "amplify-medinfo-staging-195003-deployment",
+      "UnauthRoleName": "amplify-medinfo-staging-195003-unauthRole",
+      "StackName": "amplify-medinfo-staging-195003",
+      "StackId": "arn:aws:cloudformation:us-east-2:105928657418:stack/amplify-medinfo-staging-195003/41c06f10-b387-11ec-a373-06bf5661f0ae",
+      "AmplifyAppId": "d1lkqx3xwouu8y"
     },
     "categories": {
       "auth": {
         "MedInfo": {}
-      }
-    }
-  },
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-medappfinal-dev-150256-authRole",
-      "UnauthRoleArn": "arn:aws:iam::105928657418:role/amplify-medappfinal-dev-150256-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::105928657418:role/amplify-medappfinal-dev-150256-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-medappfinal-dev-150256-deployment",
-      "UnauthRoleName": "amplify-medappfinal-dev-150256-unauthRole",
-      "StackName": "amplify-medappfinal-dev-150256",
-      "StackId": "arn:aws:cloudformation:us-east-1:105928657418:stack/amplify-medappfinal-dev-150256/31735ae0-a7b7-11ec-bbd4-124f42a49a8b",
-      "AmplifyAppId": "d1u34f9h1qr2kj"
-    },
-    "categories": {
-      "auth": {
-        "medappfinalabf42086": {},
-        "true": {}
       }
     }
   }

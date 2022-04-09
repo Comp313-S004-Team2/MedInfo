@@ -145,10 +145,10 @@ public class DoctorActivity extends AppCompatActivity {
                             .firstName(etDoctorFirstName.getText().toString())
                             .lastName(etDoctorLastName.getText().toString())
                             .email(etDoctorEmail.getText().toString())
-                            .address(etDoctorAddress.getText().toString())
-                            .phoneNumber(etDoctorPhoneNumber.getText().toString())
                             .idNumber(etDoctorLicense.getText().toString())
                             .password(etPassword.getText().toString())
+                            .address(etDoctorAddress.getText().toString())
+                            .phoneNumber(etDoctorPhoneNumber.getText().toString())
                             .role("Doctor")
                             .build();
                     Amplify.DataStore.save(

@@ -45,8 +45,6 @@ public class PatientActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient);
 
-        Amplifyy.initializeAmplify(getApplicationContext());
-
         etPatientFirstName = findViewById(R.id.txtPatientFirstName);
         etPatientLastName = findViewById(R.id.txtPatientLastName);
         etPatientAddress = findViewById(R.id.txtPatientAddress);
@@ -150,10 +148,10 @@ public class PatientActivity extends AppCompatActivity {
                             .firstName(etPatientFirstName.getText().toString())
                             .lastName(etPatientLastName.getText().toString())
                             .email(etPatientEmail.getText().toString())
-                            .address(etPatientAddress.getText().toString())
-                            .phoneNumber(etPatientPhoneNumber.getText().toString())
                             .idNumber(etPatientHealthcardNumber.getText().toString())
                             .password(etPassword.getText().toString())
+                            .address(etPatientAddress.getText().toString())
+                            .phoneNumber(etPatientPhoneNumber.getText().toString())
                             .role("Patient")
                             .build();
                     Amplify.DataStore.save(

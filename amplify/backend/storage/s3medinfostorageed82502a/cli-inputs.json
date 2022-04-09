@@ -1,7 +1,7 @@
 {
-  "resourceName": "s3medinfostorage97d5da4e",
-  "bucketName": "medinfo-storage-97d5da4e",
-  "policyUUID": "2c276434",
+  "resourceName": "s3medinfostorageed82502a",
+  "bucketName": "medinfo-storage-ed82502a",
+  "policyUUID": "de440d3f",
   "storageAccess": "authAndGuest",
   "guestAccess": [
     "DELETE",

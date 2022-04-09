@@ -14,6 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedRecRoomDB">
         <activity
+            android:name=".activity.Appointment"
+            android:exported="false" />
+        <activity
+            android:name=".activity.DoctorList"
+            android:exported="false" />
+        <activity
             android:name=".activity.GGalleryAvtivity"
             android:exported="false" />
         <activity

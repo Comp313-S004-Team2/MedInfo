@@ -25,26 +25,26 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
   @AuthRule(allow = AuthStrategy.PUBLIC, operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE, ModelOperation.READ })
 })
 public final class User implements Model {
-  public static final QueryField ID = field("id");
-  public static final QueryField FIRST_NAME = field("firstName");
-  public static final QueryField LAST_NAME = field("lastName");
-  public static final QueryField EMAIL = field("email");
-  public static final QueryField ADDRESS = field("address");
-  public static final QueryField PHONE_NUMBER = field("phoneNumber");
-  public static final QueryField ID_NUMBER = field("idNumber");
-  public static final QueryField PASSWORD = field("password");
-  public static final QueryField ROLE = field("role");
+  public static final QueryField ID = field("User", "id");
+  public static final QueryField FIRST_NAME = field("User", "firstName");
+  public static final QueryField LAST_NAME = field("User", "lastName");
+  public static final QueryField EMAIL = field("User", "email");
+  public static final QueryField ID_NUMBER = field("User", "idNumber");
+  public static final QueryField PASSWORD = field("User", "password");
+  public static final QueryField ADDRESS = field("User", "address");
+  public static final QueryField PHONE_NUMBER = field("User", "phoneNumber");
+  public static final QueryField ROLE = field("User", "role");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String firstName;
   private final @ModelField(targetType="String", isRequired = true) String lastName;
   private final @ModelField(targetType="String", isRequired = true) String email;
-  private final @ModelField(targetType="String", isRequired = true) String address;
-  private final @ModelField(targetType="String", isRequired = true) String phoneNumber;
   private final @ModelField(targetType="String", isRequired = true) String idNumber;
   private final @ModelField(targetType="String", isRequired = true) String password;
+  private final @ModelField(targetType="String", isRequired = true) String address;
+  private final @ModelField(targetType="String", isRequired = true) String phoneNumber;
   private final @ModelField(targetType="String", isRequired = true) String role;
-  private @ModelField(targetType="AWSDateTime") Temporal.DateTime createdAt;
-  private @ModelField(targetType="AWSDateTime") Temporal.DateTime updatedAt;
+  private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
+  private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String getId() {
       return id;
   }
@@ -61,20 +61,20 @@ public final class User implements Model {
       return email;
   }
   
-  public String getAddress() {
-      return address;
-  }
-  
-  public String getPhoneNumber() {
-      return phoneNumber;
-  }
-  
   public String getIdNumber() {
       return idNumber;
   }
   
   public String getPassword() {
       return password;
+  }
+  
+  public String getAddress() {
+      return address;
+  }
+  
+  public String getPhoneNumber() {
+      return phoneNumber;
   }
   
   public String getRole() {
@@ -89,15 +89,15 @@ public final class User implements Model {
       return updatedAt;
   }
   
-  private User(String id, String firstName, String lastName, String email, String address, String phoneNumber, String idNumber, String password, String role) {
+  private User(String id, String firstName, String lastName, String email, String idNumber, String password, String address, String phoneNumber, String role) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
-    this.address = address;
-    this.phoneNumber = phoneNumber;
     this.idNumber = idNumber;
     this.password = password;
+    this.address = address;
+    this.phoneNumber = phoneNumber;
     this.role = role;
   }
   
@@ -113,10 +113,10 @@ public final class User implements Model {
               ObjectsCompat.equals(getFirstName(), user.getFirstName()) &&
               ObjectsCompat.equals(getLastName(), user.getLastName()) &&
               ObjectsCompat.equals(getEmail(), user.getEmail()) &&
-              ObjectsCompat.equals(getAddress(), user.getAddress()) &&
-              ObjectsCompat.equals(getPhoneNumber(), user.getPhoneNumber()) &&
               ObjectsCompat.equals(getIdNumber(), user.getIdNumber()) &&
               ObjectsCompat.equals(getPassword(), user.getPassword()) &&
+              ObjectsCompat.equals(getAddress(), user.getAddress()) &&
+              ObjectsCompat.equals(getPhoneNumber(), user.getPhoneNumber()) &&
               ObjectsCompat.equals(getRole(), user.getRole()) &&
               ObjectsCompat.equals(getCreatedAt(), user.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), user.getUpdatedAt());
@@ -130,10 +130,10 @@ public final class User implements Model {
       .append(getFirstName())
       .append(getLastName())
       .append(getEmail())
-      .append(getAddress())
-      .append(getPhoneNumber())
       .append(getIdNumber())
       .append(getPassword())
+      .append(getAddress())
+      .append(getPhoneNumber())
       .append(getRole())
       .append(getCreatedAt())
       .append(getUpdatedAt())
@@ -149,10 +149,10 @@ public final class User implements Model {
       .append("firstName=" + String.valueOf(getFirstName()) + ", ")
       .append("lastName=" + String.valueOf(getLastName()) + ", ")
       .append("email=" + String.valueOf(getEmail()) + ", ")
-      .append("address=" + String.valueOf(getAddress()) + ", ")
-      .append("phoneNumber=" + String.valueOf(getPhoneNumber()) + ", ")
       .append("idNumber=" + String.valueOf(getIdNumber()) + ", ")
       .append("password=" + String.valueOf(getPassword()) + ", ")
+      .append("address=" + String.valueOf(getAddress()) + ", ")
+      .append("phoneNumber=" + String.valueOf(getPhoneNumber()) + ", ")
       .append("role=" + String.valueOf(getRole()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
@@ -191,10 +191,10 @@ public final class User implements Model {
       firstName,
       lastName,
       email,
-      address,
-      phoneNumber,
       idNumber,
       password,
+      address,
+      phoneNumber,
       role);
   }
   public interface FirstNameStep {
@@ -208,17 +208,7 @@ public final class User implements Model {
   
 
   public interface EmailStep {
-    AddressStep email(String email);
-  }
-  
-
-  public interface AddressStep {
-    PhoneNumberStep address(String address);
-  }
-  
-
-  public interface PhoneNumberStep {
-    IdNumberStep phoneNumber(String phoneNumber);
+    IdNumberStep email(String email);
   }
   
 
@@ -228,7 +218,17 @@ public final class User implements Model {
   
 
   public interface PasswordStep {
-    RoleStep password(String password);
+    AddressStep password(String password);
+  }
+  
+
+  public interface AddressStep {
+    PhoneNumberStep address(String address);
+  }
+  
+
+  public interface PhoneNumberStep {
+    RoleStep phoneNumber(String phoneNumber);
   }
   
 
@@ -243,15 +243,15 @@ public final class User implements Model {
   }
   
 
-  public static class Builder implements FirstNameStep, LastNameStep, EmailStep, AddressStep, PhoneNumberStep, IdNumberStep, PasswordStep, RoleStep, BuildStep {
+  public static class Builder implements FirstNameStep, LastNameStep, EmailStep, IdNumberStep, PasswordStep, AddressStep, PhoneNumberStep, RoleStep, BuildStep {
     private String id;
     private String firstName;
     private String lastName;
     private String email;
-    private String address;
-    private String phoneNumber;
     private String idNumber;
     private String password;
+    private String address;
+    private String phoneNumber;
     private String role;
     @Override
      public User build() {
@@ -262,10 +262,10 @@ public final class User implements Model {
           firstName,
           lastName,
           email,
-          address,
-          phoneNumber,
           idNumber,
           password,
+          address,
+          phoneNumber,
           role);
     }
     
@@ -284,23 +284,9 @@ public final class User implements Model {
     }
     
     @Override
-     public AddressStep email(String email) {
+     public IdNumberStep email(String email) {
         Objects.requireNonNull(email);
         this.email = email;
-        return this;
-    }
-    
-    @Override
-     public PhoneNumberStep address(String address) {
-        Objects.requireNonNull(address);
-        this.address = address;
-        return this;
-    }
-    
-    @Override
-     public IdNumberStep phoneNumber(String phoneNumber) {
-        Objects.requireNonNull(phoneNumber);
-        this.phoneNumber = phoneNumber;
         return this;
     }
     
@@ -312,9 +298,23 @@ public final class User implements Model {
     }
     
     @Override
-     public RoleStep password(String password) {
+     public AddressStep password(String password) {
         Objects.requireNonNull(password);
         this.password = password;
+        return this;
+    }
+    
+    @Override
+     public PhoneNumberStep address(String address) {
+        Objects.requireNonNull(address);
+        this.address = address;
+        return this;
+    }
+    
+    @Override
+     public RoleStep phoneNumber(String phoneNumber) {
+        Objects.requireNonNull(phoneNumber);
+        this.phoneNumber = phoneNumber;
         return this;
     }
     
@@ -337,15 +337,15 @@ public final class User implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String firstName, String lastName, String email, String address, String phoneNumber, String idNumber, String password, String role) {
+    private CopyOfBuilder(String id, String firstName, String lastName, String email, String idNumber, String password, String address, String phoneNumber, String role) {
       super.id(id);
       super.firstName(firstName)
         .lastName(lastName)
         .email(email)
-        .address(address)
-        .phoneNumber(phoneNumber)
         .idNumber(idNumber)
         .password(password)
+        .address(address)
+        .phoneNumber(phoneNumber)
         .role(role);
     }
     
@@ -365,16 +365,6 @@ public final class User implements Model {
     }
     
     @Override
-     public CopyOfBuilder address(String address) {
-      return (CopyOfBuilder) super.address(address);
-    }
-    
-    @Override
-     public CopyOfBuilder phoneNumber(String phoneNumber) {
-      return (CopyOfBuilder) super.phoneNumber(phoneNumber);
-    }
-    
-    @Override
      public CopyOfBuilder idNumber(String idNumber) {
       return (CopyOfBuilder) super.idNumber(idNumber);
     }
@@ -382,6 +372,16 @@ public final class User implements Model {
     @Override
      public CopyOfBuilder password(String password) {
       return (CopyOfBuilder) super.password(password);
+    }
+    
+    @Override
+     public CopyOfBuilder address(String address) {
+      return (CopyOfBuilder) super.address(address);
+    }
+    
+    @Override
+     public CopyOfBuilder phoneNumber(String phoneNumber) {
+      return (CopyOfBuilder) super.phoneNumber(phoneNumber);
     }
     
     @Override

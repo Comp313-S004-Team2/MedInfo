@@ -3,7 +3,7 @@
   "cognitoConfig": {
     "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": true,
-    "resourceNameTruncated": "medinf5372ba75",
+    "resourceNameTruncated": "medinfe25a52db",
     "userPoolName": "MedInfo",
     "autoVerifiedAttributes": [
       "email"
@@ -30,9 +30,9 @@
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "MedInf5372ba75_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "MedInfe25a52db_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "5372ba75",
+    "sharedId": "e25a52db",
     "resourceName": "MedInfo",
     "authSelections": "identityPoolAndUserPool",
     "serviceName": "Cognito",
