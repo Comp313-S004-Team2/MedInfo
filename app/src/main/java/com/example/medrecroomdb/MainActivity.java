@@ -9,6 +9,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -35,6 +36,7 @@ import com.example.medrecroomdb.activity.PatientActivity;
 import com.example.medrecroomdb.activity.DoctorSearchPatientActivity;
 import com.example.medrecroomdb.activity.AdminSearchUserActivity;
 import com.example.medrecroomdb.activity.PatientNavActivity;
+import com.example.medrecroomdb.activity.SignUp;
 import com.example.medrecroomdb.model.Admin;
 //import com.example.medrecroomdb.model.Doctor;
 import com.example.medrecroomdb.model.Patient;
@@ -55,11 +57,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     String role = "";
     Button buttonUploadS3;
     private static Uri mSelectedFileUri = null;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /*sharedPreferences = getSharedPreferences("loginInfo", MODE_PRIVATE);
+        if(sharedPreferences.getString("role", null).matches("Doctor") ) {
+            Intent intentDoctor = new Intent(this, DoctorSearchPatientActivity.class);
+            startActivity(intentDoctor);
+            finish();
+        }else if(sharedPreferences.getString("role", null).matches("Patient")){
+            Intent intentDoctor = new Intent(this, PatientNavActivity.class);
+            startActivity(intentDoctor);
+            finish();
+        }*/
 
         /*try {
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
@@ -81,16 +95,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         buttonLogin = findViewById(R.id.btnLogin);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        //Spinner spinner = (Spinner) findViewById(R.id.spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.user_array, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
+        //spinner.setAdapter(adapter);
 
-        spinner.setOnItemSelectedListener(this);
+        //spinner.setOnItemSelectedListener(this);
+
 
         // Set up click listener for buttonLogin
         buttonLogin.setOnClickListener(new View.OnClickListener() {
@@ -101,27 +116,47 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     String userName = editTextId.getText().toString();
                     String password = editTextPassword.getText().toString();
 
+                    if(editTextId.getText().toString().isEmpty()){
+                        editTextId.setError("Email Address is Required");
+                    }
+                    if(editTextPassword.getText().toString().isEmpty()){
+                        editTextPassword.setError("Password is Required");
+                    }
+
                     Amplify.DataStore.query(User.class,
                             Where.matches(User.EMAIL.eq(userName).and(User.PASSWORD.eq(password))),
                             goodPosts -> {
                                 if (goodPosts.hasNext()) {
                                     User user = goodPosts.next();
                                     Log.i("user", user.getRole());
+                                    sharedPreferences = getSharedPreferences("loginInfo", MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("idNumber", user.getIdNumber().toString());
+                                    editor.putString("role", user.getRole());
+                                    editor.putBoolean("isLoggedIn", true);
+                                    editor.commit();
                                     if(user.getRole().matches("Doctor") ) {
                                         Intent intentDoctor = new Intent(v.getContext(), DoctorSearchPatientActivity.class);
                                         intentDoctor.putExtra("UserId", user.getIdNumber());
                                         intentDoctor.putExtra("Role", user.getRole());
                                         startActivity(intentDoctor);
+                                        finish();
                                     }else if(user.getRole().matches("Patient")){
                                         Intent intentDoctor = new Intent(v.getContext(), PatientNavActivity.class);
                                         intentDoctor.putExtra("UserId", user.getIdNumber());
                                         intentDoctor.putExtra("Role", user.getRole());
                                         startActivity(intentDoctor);
+                                        finish();
                                     }
-                                }
+                                }else{
+                                    runOnUiThread(() -> {
+                                        Toast.makeText(MainActivity.this, "Incorrect Username/Password", Toast.LENGTH_SHORT).show();
+                                    });
+                                    }
                             },
                             failure -> Log.e("MyAmplifyApp", "Query failed.", failure)
                     );
+
 
 
                     // Set up variable doctor references of Type Doctor to find doctor by doctorId by findByDoctorId()
@@ -154,6 +189,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
             }
         });
+    }
+
+    public void onSignUp(View view){
+        Intent signupIntent = new Intent(this, SignUp.class);
+        startActivity(signupIntent);
+        editTextId.setError(null);
+        editTextPassword.setError(null);
     }
 
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {

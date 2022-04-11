@@ -22,6 +22,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.core.model.query.Where;
+import com.amplifyframework.datastore.generated.model.User;
 import com.example.medrecroomdb.R;
 import com.example.medrecroomdb.model.MedicalRecord;
 import com.example.medrecroomdb.model.Patient;
@@ -32,35 +34,79 @@ import java.util.ArrayList;
 
 public class DoctorSearchResultsActivity extends AppCompatActivity {
 
-    private PatientViewModel patientViewModel;
-    private TextView fNameTxtView, lNameTxtView, addrTxtView, healthcardTxtView, phoneTxtView, emailTxtView, medicalTxtView,notesTxtView;
-    Patient patient;
-    String healthcard;
-    private ArrayList<MedicalRecord> medicalRecordsList;
-    private RecyclerView rcv;
-    private Button noteBtn;
-    Button uploadToS3;
-    private static Uri mSelectedFileUri = null;
+    //private PatientViewModel patientViewModel;
+    private TextView tvFname, tvLName, tvAddress, tvHealthCard, tvPhone, tvEmail;
+    private User patient;
+    private String idNumber;
+    //Patient patient;
+    //String healthcard;
+    //private ArrayList<MedicalRecord> medicalRecordsList;
+    //private RecyclerView rcv;
+    //private Button noteBtn;
+    //Button uploadToS3;
+    //private static Uri mSelectedFileUri = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_searchresults_contraint_layout);
-        rcv = findViewById(R.id.rcvPatient);
+        tvFname = findViewById(R.id.tvFNamePatInfo);
+        tvLName = findViewById(R.id.tvLNamePatInfo);
+        tvAddress = findViewById(R.id.tvAddressPatInfo);
+        tvHealthCard = findViewById(R.id.tvHealthCardPatInfo);
+        tvPhone = findViewById(R.id.tvPhonePatInfo);
+        tvEmail = findViewById(R.id.tvEmailPatInfo);
+
+        Bundle extras = this.getIntent().getExtras();
+        if(!extras.isEmpty()){
+            idNumber = extras.getString("HealthCard");
+        }
+
+        Amplify.DataStore.query(User.class, Where.matches(User.ID_NUMBER.eq(idNumber)),
+                goodPosts -> {
+                    if (goodPosts.hasNext()) {
+                        patient = goodPosts.next();
+                        Log.i("MyAmplifyApp", "Post: " +  patient);
+                        runOnUiThread(() -> {
+                            tvFname.setText(patient.getFirstName());
+                            tvLName.setText(patient.getLastName());
+                            tvAddress.setText(patient.getAddress());
+                            tvHealthCard.setText(patient.getIdNumber());
+                            tvPhone.setText(patient.getPhoneNumber());
+                            tvEmail.setText(patient.getEmail());
+                        });
+                    }
+                },
+                failure -> Log.e("MyAmplifyApp", "Query failed.", failure)
+        );
+
+    }
+
+    public void onViewMedicalRecords(View view){
+        Intent medicalRecordsIntent = new Intent(this, ViewMedicalRecords.class);
+        startActivity(medicalRecordsIntent);
+    }
+}
+
+
+
+
+// OLD ------------------------------------------------------------------------------------------------------------------------------------------------------//
+        /*rcv = findViewById(R.id.rcvPatient);
         medicalRecordsList = new ArrayList<>();
         setUserInfo();
         setAdapter();
 
-        noteBtn = (Button) findViewById(R.id.btnAddNote);
+        noteBtn = (Button) findViewById(R.id.btnViewNotes);
         noteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent2 = new Intent(getApplicationContext(), NoteActivity.class);
                 startActivity(intent2);
             }
-        });
+        });*/
 
-        try{
+        /*try{
             Intent intent=getIntent();
             Intent receiverNotes = getIntent();
             String receivedNotesValue = receiverNotes.getStringExtra("AddNotes");
@@ -84,15 +130,15 @@ public class DoctorSearchResultsActivity extends AppCompatActivity {
                 //medicalTxtView = findViewById(R.id.medicalTextView);
                 //medicalTxtView.setText(patient.);
             }
-            notesTxtView = (TextView) findViewById(R.id.textView33);
+            notesTxtView = (TextView) findViewById(R.id.tvAddressPatInfo);
             notesTxtView.setText(receivedNotesValue);
 
         }
         catch(Exception e)
         {
             Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
-        }
-                ///    private void setUserNotes(){
+        }*/
+        ///    private void setUserNotes(){
         ////
         ////notesTxtView = findViewById(R.id.boxEditNotes);
         ////notesTxtView.setText(boxEditNotes);
@@ -102,7 +148,7 @@ public class DoctorSearchResultsActivity extends AppCompatActivity {
         ////    }
 
 
-        uploadToS3 = (Button) findViewById(R.id.addMedHis);
+        /*uploadToS3 = (Button) findViewById(R.id.addMedHis);
         uploadToS3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,9 +160,9 @@ public class DoctorSearchResultsActivity extends AppCompatActivity {
                 ) {
                     showFileChooser(DoctorSearchResultsActivity.this);
                 } else {
-                /*Requests permissions to be granted to this application. These permissions
-                 must be requested in your manifest, they should not be granted to your app,
-                 and they should have protection level*/
+                //Requests permissions to be granted to this application. These permissions
+                //must be requested in your manifest, they should not be granted to your app,
+                //and they should have protection level
                     ActivityCompat.requestPermissions(
                             DoctorSearchResultsActivity.this,
                             new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
@@ -199,5 +245,4 @@ public class DoctorSearchResultsActivity extends AppCompatActivity {
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         // Launches the image selection of phone storage using the constant code.
         activity.startActivityForResult(intent, 2);
-    }
-}
+    }*/

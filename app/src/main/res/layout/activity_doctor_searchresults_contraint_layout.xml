@@ -22,154 +22,163 @@
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
         android:text="First Name:"
-        app:layout_constraintStart_toStartOf="@+id/rcvPatient"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
     <TextView
         android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
         android:text="Last Name:"
-        app:layout_constraintStart_toStartOf="@+id/textView20"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
     <TextView
         android:id="@+id/textView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
         android:text="Address:"
-        app:layout_constraintStart_toStartOf="@+id/textView21"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
     <TextView
         android:id="@+id/textView24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
         android:text="Health Card Number:"
-        app:layout_constraintStart_toStartOf="@+id/textView22"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
     <TextView
         android:id="@+id/textView25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
         android:text="Phone Number:"
-        app:layout_constraintStart_toStartOf="@+id/textView24"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
     <TextView
         android:id="@+id/textView27"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
         android:text="Email:"
-        app:layout_constraintStart_toStartOf="@+id/textView25"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView25" />
 
-    <TextView
-        android:id="@+id/textView28"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Medical Records:"
-        app:layout_constraintStart_toStartOf="@+id/textView27"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
-
-    <TextView
-        android:id="@+id/patientResultsCFirstName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView20"
-        app:layout_constraintStart_toEndOf="@+id/textView24" />
-
-    <TextView
-        android:id="@+id/patientResultsCLastName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/patientResultsCFirstName"
-        app:layout_constraintTop_toBottomOf="@+id/patientResultsCFirstName" />
-
-    <TextView
-        android:id="@+id/patientResultsCFAddressName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/patientResultsCLastName"
-        app:layout_constraintTop_toBottomOf="@+id/patientResultsCLastName" />
-
-    <TextView
-        android:id="@+id/patientResultsCFHCard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/patientResultsCFAddressName"
-        app:layout_constraintTop_toBottomOf="@+id/patientResultsCFAddressName" />
-
-    <TextView
-        android:id="@+id/pResultsPhoneNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        app:layout_constraintStart_toEndOf="@+id/textView24"
-        app:layout_constraintTop_toBottomOf="@+id/patientResultsCFHCard" />
-
-    <TextView
-        android:id="@+id/pResultsCEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/pResultsPhoneNumber"
-        app:layout_constraintTop_toBottomOf="@+id/pResultsPhoneNumber" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcvPatient"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.378"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView28" />
-
     <Button
-        android:id="@+id/btnAddNote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Add Note"
-        app:layout_constraintBottom_toTopOf="@+id/addMedHis"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView33" />
-
-    <TextView
-        android:id="@+id/textView31"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="20dp"
-        android:text="Notes:"
-        app:layout_constraintEnd_toStartOf="@+id/textView33"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rcvPatient" />
-
-    <TextView
-        android:id="@+id/textView33"
-        android:layout_width="212dp"
-        android:layout_height="83dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toEndOf="@+id/textView31"
-        app:layout_constraintTop_toBottomOf="@+id/rcvPatient" />
-
-    <Button
-        android:id="@+id/addMedHis"
+        android:id="@+id/btnViewMedicalHistory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="24dp"
-        android:text="Add Medical Exam/History"
+        android:layout_marginBottom="64dp"
+        android:onClick="onViewMedicalRecords"
+        android:text="View Medical Records"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView59" />
+
+    <TextView
+        android:id="@+id/tvFNamePatInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="First Name"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toEndOf="@+id/textView20"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+    <TextView
+        android:id="@+id/tvLNamePatInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Last Name"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toEndOf="@+id/textView21"
+        app:layout_constraintTop_toBottomOf="@+id/tvFNamePatInfo" />
+
+    <TextView
+        android:id="@+id/tvAddressPatInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Address"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toEndOf="@+id/textView22"
+        app:layout_constraintTop_toBottomOf="@+id/tvLNamePatInfo" />
+
+    <TextView
+        android:id="@+id/tvHealthCardPatInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Card Number"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toEndOf="@+id/textView24"
+        app:layout_constraintTop_toBottomOf="@+id/tvAddressPatInfo" />
+
+    <TextView
+        android:id="@+id/tvPhonePatInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Phone"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toEndOf="@+id/textView25"
+        app:layout_constraintTop_toBottomOf="@+id/tvHealthCardPatInfo" />
+
+    <TextView
+        android:id="@+id/tvEmailPatInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Email"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toEndOf="@+id/textView27"
+        app:layout_constraintTop_toBottomOf="@+id/tvPhonePatInfo" />
+
+    <TextView
+        android:id="@+id/textView59"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:text="Number of Medical Recods:"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+
+    <TextView
+        android:id="@+id/tvMedicalHistoryCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="0"
+        android:textSize="14sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toEndOf="@+id/textView59"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmailPatInfo" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

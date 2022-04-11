@@ -8,136 +8,154 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="181dp"
-        android:layout_height="130dp"
-        app:srcCompat="@drawable/ic_medinfo_logo"
-        tools:ignore="ImageContrastCheck" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="20dp"
-        android:text="MedInfo"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:gravity="center_horizontal">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="1"
-                android:layout_gravity="right|center_vertical"
-                android:layout_marginRight="8dp"
-                android:layout_weight="1"
-                android:text="Email Address:"
-                android:textSize="14dp" />
-
-            <EditText
-                android:id="@+id/txtLoginId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="2"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="text" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="1"
-                android:layout_gravity="right|center_vertical"
-                android:layout_marginRight="8dp"
-                android:layout_weight="1"
-                android:text="Password:"
-                android:textSize="14dp" />
-
-            <EditText
-                android:id="@+id/txtLoginPassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="2"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPassword" />
-        </TableRow>
-    </TableLayout>
     <!--    <Button-->
     <!--        android:text="Login"-->
     <!--        android:onClick="startLoginActivity"-->
     <!--        android:layout_width="wrap_content"-->
     <!--        android:layout_height="wrap_content"/>-->
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="37dp"
-        android:layout_marginBottom="10dp"
-        android:entries="@array/user_array" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="40dp"
-        android:backgroundTint="#D8E8EA"
-        android:text="Log in"
-        android:textColor="#02786D" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="181dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="75dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_medinfo_logo"
+            tools:ignore="ImageContrastCheck" />
 
-    <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="MedInfo"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="#D8E8EA"
+            android:text="Log in"
+            android:textColor="#02786D"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
 
-        </TableRow>
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginTop="32dp"
+            android:gravity="center_horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView28">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="Don't have an account?"
-                android:textStyle="italic" />
-        </TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:text="Email Address:"
+                    android:textSize="14dp" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                <EditText
+                    android:id="@+id/txtLoginId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="text" />
+            </TableRow>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnRegister"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#00BCD4"
-                android:text="Sign up"
-                android:textColor="#FBFAFA"
-                android:textSize="16sp" />
-        </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    </TableLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:text="Password:"
+                    android:textSize="14dp" />
+
+                <EditText
+                    android:id="@+id/txtLoginPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPassword" />
+            </TableRow>
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnLogin">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="Don't have an account?"
+                    android:textStyle="italic" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnRegister"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00BCD4"
+                    android:onClick="onSignUp"
+                    android:text="Sign up"
+                    android:textColor="#FBFAFA"
+                    android:textSize="16sp" />
+            </TableRow>
+
+        </TableLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
