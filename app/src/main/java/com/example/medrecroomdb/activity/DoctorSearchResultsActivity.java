@@ -2,6 +2,7 @@ package com.example.medrecroomdb.activity;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -38,6 +39,7 @@ public class DoctorSearchResultsActivity extends AppCompatActivity {
     private TextView tvFname, tvLName, tvAddress, tvHealthCard, tvPhone, tvEmail;
     private User patient;
     private String idNumber;
+    SharedPreferences sharedPreferences;
     //Patient patient;
     //String healthcard;
     //private ArrayList<MedicalRecord> medicalRecordsList;
@@ -57,10 +59,8 @@ public class DoctorSearchResultsActivity extends AppCompatActivity {
         tvPhone = findViewById(R.id.tvPhonePatInfo);
         tvEmail = findViewById(R.id.tvEmailPatInfo);
 
-        Bundle extras = this.getIntent().getExtras();
-        if(!extras.isEmpty()){
-            idNumber = extras.getString("HealthCard");
-        }
+        sharedPreferences = getSharedPreferences("doctorSearchPatient", MODE_PRIVATE);
+        idNumber = sharedPreferences.getString("healthCardToSearch", null);
 
         Amplify.DataStore.query(User.class, Where.matches(User.ID_NUMBER.eq(idNumber)),
                 goodPosts -> {

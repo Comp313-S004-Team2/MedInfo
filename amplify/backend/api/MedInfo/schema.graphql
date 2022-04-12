@@ -1,3 +1,14 @@
+type RecordMetadata @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  description: String!
+  uploader: String!
+  uploaderRole: String!
+  uploaderId: String!
+  fileExtension: String!
+  patientId: String!
+}
+
 type User @model @auth(rules: [{allow: public}]) {
   id: ID!
   firstName: String!
@@ -9,3 +20,4 @@ type User @model @auth(rules: [{allow: public}]) {
   phoneNumber: String!
   role: String!
 }
+ 

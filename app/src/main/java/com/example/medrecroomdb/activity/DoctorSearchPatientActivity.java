@@ -29,6 +29,7 @@ public class DoctorSearchPatientActivity extends AppCompatActivity {
     //private Button btnSearchPatient;
     //private EditText editText_pHealthcardNumber;
     private EditText healthCardNumber;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,10 @@ public class DoctorSearchPatientActivity extends AppCompatActivity {
     }
 
     public void onSearch(View view){
+        sharedPreferences = getSharedPreferences("doctorSearchPatient", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("healthCardToSearch", healthCardNumber.getText().toString());
+        editor.commit();
         Log.i("Health Card Number", healthCardNumber.getText().toString());
         Amplify.DataStore.query(User.class, Where.matches(User.ID_NUMBER.eq(healthCardNumber.getText().toString())),
                 goodPosts -> {
@@ -84,7 +89,10 @@ public class DoctorSearchPatientActivity extends AppCompatActivity {
                         startActivity(searchResultIntent);
                     }
                     else{
-                        Toast.makeText(this, "Patient Not Found", Toast.LENGTH_SHORT).show();
+                        runOnUiThread(() -> {
+                            //Toast.makeText(this, "Patient Not Found", Toast.LENGTH_SHORT).show();
+                            healthCardNumber.setError("Patient not Found");
+                        });
                     }
                 },
                 failure -> Log.e("MyAmplifyApp", "Query failed.", failure)

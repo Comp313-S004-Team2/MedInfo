@@ -134,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                     editor.putString("idNumber", user.getIdNumber().toString());
                                     editor.putString("role", user.getRole());
                                     editor.putBoolean("isLoggedIn", true);
+                                    editor.putString("userName", user.getFirstName() + " " + user.getLastName());
                                     editor.commit();
                                     if(user.getRole().matches("Doctor") ) {
                                         Intent intentDoctor = new Intent(v.getContext(), DoctorSearchPatientActivity.class);

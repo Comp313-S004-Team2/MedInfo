@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.core.model.query.Where;
@@ -148,7 +149,10 @@ public class SignUp extends AppCompatActivity {
                     .build();
             Amplify.DataStore.save(
                     item,
-                    success -> Log.i("Amplify", "Saved item: " + success.item().getId()),
+                    success -> {Log.i("Amplify", "Saved item: " + success.item().getId());
+                    runOnUiThread(() -> {
+                        Toast.makeText(this, "Sign Up Successful", Toast.LENGTH_SHORT).show();
+                    });},
                     error -> Log.e("Amplify", "Could not save item to DataStore", error)
             );
             finish();
