@@ -35,7 +35,7 @@ public class PatientNavActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_nav);
 
-        /*uploadBtnPatient = (Button) findViewById(R.id.uploadBtnPatient);
+        uploadBtnPatient = (Button) findViewById(R.id.uploadBtnPatient);
         uploadBtnPatient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,10 +134,15 @@ public class PatientNavActivity extends AppCompatActivity {
                     }
                 }
             }
-        }*/
+        }
     }
 
     public void onScheduleAppointment(View view){
+        Intent scheduleAppointmentIntent = new Intent(this, DoctorList.class);
+        startActivity(scheduleAppointmentIntent);
+    }
+
+    public void changeAppointmentStatus(View view){
         Intent scheduleAppointmentIntent = new Intent(this, DoctorList.class);
         startActivity(scheduleAppointmentIntent);
     }

@@ -23,5 +23,26 @@
     <string name="lbl_ScheduleAppointment">Schedule Appointment</string>
     <string name="lbl_UploadMedicalHistory">Upload Medical History</string>
 
+    <!-- Dropdown menu for appointment week days-->
+    <string-array name="week_date">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
+
+    <!-- Dropdown menu for appointment time morning/afternoon-->
+    <string-array name="day_time">
+        <item>8 am</item>
+        <item>9 am</item>
+        <item>10 am</item>
+        <item>11 am</item>
+        <item>12 pm</item>
+        <item>2 pm</item>
+        <item>3 pm</item>
+        <item>4 pm</item>
+    </string-array>
 
 </resources>

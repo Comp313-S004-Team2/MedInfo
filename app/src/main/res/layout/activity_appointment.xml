@@ -6,13 +6,61 @@
     android:layout_height="match_parent"
     tools:context=".activity.Appointment">
 
-    <TextView
-        android:id="@+id/textView37"
+    <Button
+        android:id="@+id/confirmBtnSchedule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This is where we set appointment"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="107dp"
+        android:layout_marginBottom="272dp"
+        android:onClick="confirmAppointment"
+        android:text="Confirm"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_weekDay" />
+
+    <Spinner
+        android:id="@+id/spinner_weekDay"
+        android:layout_width="129dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selectDay" />
+
+    <TextView
+        android:id="@+id/selectDay"
+        android:layout_width="92dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="218dp"
+        android:text="Select Day:"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/selectTime"
+        android:layout_width="92dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="107dp"
+        android:layout_marginTop="218dp"
+        android:layout_marginEnd="60dp"
+        android:text="Select Time:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/selectDay"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner_timeDay"
+        android:layout_width="129dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="63dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="45dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/spinner_weekDay"
+        app:layout_constraintTop_toBottomOf="@+id/selectTime" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
