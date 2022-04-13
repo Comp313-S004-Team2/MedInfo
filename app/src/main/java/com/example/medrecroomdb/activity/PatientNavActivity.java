@@ -1,7 +1,10 @@
 package com.example.medrecroomdb.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -11,6 +14,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.amplifyframework.core.Amplify;
 import com.example.medrecroomdb.R;
@@ -44,6 +50,7 @@ public class PatientNavActivity extends AppCompatActivity {
                         Manifest.permission.READ_EXTERNAL_STORAGE
                 )
                         == PackageManager.PERMISSION_GRANTED
+
                 ) {
                     showFileChooser(PatientNavActivity.this);
                 } else {

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,7 +39,7 @@ public class RCDoctorListAdapter extends RecyclerView.Adapter<RCDoctorListAdapte
         holder.licenseNumber.setText(doctors.get(position).getIdNumber());
         holder.email.setText(doctors.get(position).getEmail());
         holder.phone.setText(doctors.get(position).getPhoneNumber());
-        holder.doctorCardView.setOnClickListener(v -> {
+        holder.scheduleBtn.setOnClickListener(v -> {
             Intent setAppointmentIntent = new Intent(context, Appointment.class);
             context.startActivity(setAppointmentIntent);
         });
@@ -53,6 +54,7 @@ public class RCDoctorListAdapter extends RecyclerView.Adapter<RCDoctorListAdapte
 
         TextView doctorName, licenseNumber, email, phone;
         CardView doctorCardView;
+        Button scheduleBtn;
 
         public DoctorListViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -61,6 +63,8 @@ public class RCDoctorListAdapter extends RecyclerView.Adapter<RCDoctorListAdapte
             email = itemView.findViewById(R.id.tvDocListEmail);
             phone = itemView.findViewById(R.id.tvDocListPhone);
             doctorCardView = itemView.findViewById(R.id.cvDoctor);
+            scheduleBtn = itemView.findViewById(R.id.scheduleBtnDoctor);
         }
+
     }
 }
