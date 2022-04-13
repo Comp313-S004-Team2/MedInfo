@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.core.model.query.Where;
+import com.amplifyframework.datastore.generated.model.RecordMetadata;
 import com.amplifyframework.datastore.generated.model.User;
 import com.example.medrecroomdb.R;
 import com.example.medrecroomdb.model.MedicalRecord;
@@ -36,10 +37,11 @@ import java.util.ArrayList;
 public class DoctorSearchResultsActivity extends AppCompatActivity {
 
     //private PatientViewModel patientViewModel;
-    private TextView tvFname, tvLName, tvAddress, tvHealthCard, tvPhone, tvEmail;
+    private TextView tvFname, tvLName, tvAddress, tvHealthCard, tvPhone, tvEmail, tvMedRecCount;
     private User patient;
     private String idNumber;
     SharedPreferences sharedPreferences;
+    ArrayList<RecordMetadata> recordMetadatas;
     //Patient patient;
     //String healthcard;
     //private ArrayList<MedicalRecord> medicalRecordsList;
@@ -58,9 +60,27 @@ public class DoctorSearchResultsActivity extends AppCompatActivity {
         tvHealthCard = findViewById(R.id.tvHealthCardPatInfo);
         tvPhone = findViewById(R.id.tvPhonePatInfo);
         tvEmail = findViewById(R.id.tvEmailPatInfo);
+        tvMedRecCount = findViewById(R.id.tvMedicalHistoryCount);
+
+        recordMetadatas = new ArrayList<RecordMetadata>();
 
         sharedPreferences = getSharedPreferences("doctorSearchPatient", MODE_PRIVATE);
         idNumber = sharedPreferences.getString("healthCardToSearch", null);
+
+        Amplify.DataStore.query(
+                RecordMetadata.class, Where.matches(RecordMetadata.PATIENT_ID.eq(idNumber)),
+                items -> {
+                    while (items.hasNext()) {
+                        RecordMetadata item = items.next();
+                        recordMetadatas.add(item);
+                        Log.i("Amplify", "Id " + item.getId());
+                    }
+                    runOnUiThread(() -> {
+                        tvMedRecCount.setText("" + recordMetadatas.size());
+                    });
+                },
+                failure -> Log.e("Amplify", "Could not query DataStore", failure)
+        );
 
         Amplify.DataStore.query(User.class, Where.matches(User.ID_NUMBER.eq(idNumber)),
                 goodPosts -> {

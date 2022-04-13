@@ -138,9 +138,9 @@ public class AddRecord extends AppCompatActivity {
             RecordMetadata item = RecordMetadata.builder()
                     .title(etTitle.getText().toString())
                     .description(etDescription.getText().toString())
-                    .uploader("uploaderName")
-                    .uploaderRole("uploaderRole")
-                    .uploaderId("uploaderId")
+                    .uploader(uploaderName)
+                    .uploaderRole(uploaderRole)
+                    .uploaderId(uploaderId)
                     .fileExtension(extension)
                     .patientId(patientId)
                     .build();
