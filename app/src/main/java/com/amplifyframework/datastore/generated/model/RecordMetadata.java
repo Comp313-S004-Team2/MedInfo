@@ -33,6 +33,7 @@ public final class RecordMetadata implements Model {
   public static final QueryField UPLOADER_ID = field("RecordMetadata", "uploaderId");
   public static final QueryField FILE_EXTENSION = field("RecordMetadata", "fileExtension");
   public static final QueryField PATIENT_ID = field("RecordMetadata", "patientId");
+  public static final QueryField CREATED_ON = field("RecordMetadata", "createdOn");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String title;
   private final @ModelField(targetType="String", isRequired = true) String description;
@@ -41,6 +42,7 @@ public final class RecordMetadata implements Model {
   private final @ModelField(targetType="String", isRequired = true) String uploaderId;
   private final @ModelField(targetType="String", isRequired = true) String fileExtension;
   private final @ModelField(targetType="String", isRequired = true) String patientId;
+  private final @ModelField(targetType="String", isRequired = true) String createdOn;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String getId() {
@@ -75,6 +77,10 @@ public final class RecordMetadata implements Model {
       return patientId;
   }
   
+  public String getCreatedOn() {
+      return createdOn;
+  }
+  
   public Temporal.DateTime getCreatedAt() {
       return createdAt;
   }
@@ -83,7 +89,7 @@ public final class RecordMetadata implements Model {
       return updatedAt;
   }
   
-  private RecordMetadata(String id, String title, String description, String uploader, String uploaderRole, String uploaderId, String fileExtension, String patientId) {
+  private RecordMetadata(String id, String title, String description, String uploader, String uploaderRole, String uploaderId, String fileExtension, String patientId, String createdOn) {
     this.id = id;
     this.title = title;
     this.description = description;
@@ -92,6 +98,7 @@ public final class RecordMetadata implements Model {
     this.uploaderId = uploaderId;
     this.fileExtension = fileExtension;
     this.patientId = patientId;
+    this.createdOn = createdOn;
   }
   
   @Override
@@ -110,6 +117,7 @@ public final class RecordMetadata implements Model {
               ObjectsCompat.equals(getUploaderId(), recordMetadata.getUploaderId()) &&
               ObjectsCompat.equals(getFileExtension(), recordMetadata.getFileExtension()) &&
               ObjectsCompat.equals(getPatientId(), recordMetadata.getPatientId()) &&
+              ObjectsCompat.equals(getCreatedOn(), recordMetadata.getCreatedOn()) &&
               ObjectsCompat.equals(getCreatedAt(), recordMetadata.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), recordMetadata.getUpdatedAt());
       }
@@ -126,6 +134,7 @@ public final class RecordMetadata implements Model {
       .append(getUploaderId())
       .append(getFileExtension())
       .append(getPatientId())
+      .append(getCreatedOn())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .toString()
@@ -144,6 +153,7 @@ public final class RecordMetadata implements Model {
       .append("uploaderId=" + String.valueOf(getUploaderId()) + ", ")
       .append("fileExtension=" + String.valueOf(getFileExtension()) + ", ")
       .append("patientId=" + String.valueOf(getPatientId()) + ", ")
+      .append("createdOn=" + String.valueOf(getCreatedOn()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
@@ -171,6 +181,7 @@ public final class RecordMetadata implements Model {
       null,
       null,
       null,
+      null,
       null
     );
   }
@@ -183,7 +194,8 @@ public final class RecordMetadata implements Model {
       uploaderRole,
       uploaderId,
       fileExtension,
-      patientId);
+      patientId,
+      createdOn);
   }
   public interface TitleStep {
     DescriptionStep title(String title);
@@ -216,7 +228,12 @@ public final class RecordMetadata implements Model {
   
 
   public interface PatientIdStep {
-    BuildStep patientId(String patientId);
+    CreatedOnStep patientId(String patientId);
+  }
+  
+
+  public interface CreatedOnStep {
+    BuildStep createdOn(String createdOn);
   }
   
 
@@ -226,7 +243,7 @@ public final class RecordMetadata implements Model {
   }
   
 
-  public static class Builder implements TitleStep, DescriptionStep, UploaderStep, UploaderRoleStep, UploaderIdStep, FileExtensionStep, PatientIdStep, BuildStep {
+  public static class Builder implements TitleStep, DescriptionStep, UploaderStep, UploaderRoleStep, UploaderIdStep, FileExtensionStep, PatientIdStep, CreatedOnStep, BuildStep {
     private String id;
     private String title;
     private String description;
@@ -235,6 +252,7 @@ public final class RecordMetadata implements Model {
     private String uploaderId;
     private String fileExtension;
     private String patientId;
+    private String createdOn;
     @Override
      public RecordMetadata build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -247,7 +265,8 @@ public final class RecordMetadata implements Model {
           uploaderRole,
           uploaderId,
           fileExtension,
-          patientId);
+          patientId,
+          createdOn);
     }
     
     @Override
@@ -293,9 +312,16 @@ public final class RecordMetadata implements Model {
     }
     
     @Override
-     public BuildStep patientId(String patientId) {
+     public CreatedOnStep patientId(String patientId) {
         Objects.requireNonNull(patientId);
         this.patientId = patientId;
+        return this;
+    }
+    
+    @Override
+     public BuildStep createdOn(String createdOn) {
+        Objects.requireNonNull(createdOn);
+        this.createdOn = createdOn;
         return this;
     }
     
@@ -311,7 +337,7 @@ public final class RecordMetadata implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String title, String description, String uploader, String uploaderRole, String uploaderId, String fileExtension, String patientId) {
+    private CopyOfBuilder(String id, String title, String description, String uploader, String uploaderRole, String uploaderId, String fileExtension, String patientId, String createdOn) {
       super.id(id);
       super.title(title)
         .description(description)
@@ -319,7 +345,8 @@ public final class RecordMetadata implements Model {
         .uploaderRole(uploaderRole)
         .uploaderId(uploaderId)
         .fileExtension(fileExtension)
-        .patientId(patientId);
+        .patientId(patientId)
+        .createdOn(createdOn);
     }
     
     @Override
@@ -355,6 +382,11 @@ public final class RecordMetadata implements Model {
     @Override
      public CopyOfBuilder patientId(String patientId) {
       return (CopyOfBuilder) super.patientId(patientId);
+    }
+    
+    @Override
+     public CopyOfBuilder createdOn(String createdOn) {
+      return (CopyOfBuilder) super.createdOn(createdOn);
     }
   }
   

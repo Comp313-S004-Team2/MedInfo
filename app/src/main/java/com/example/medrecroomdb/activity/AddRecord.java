@@ -24,6 +24,7 @@ import com.amplifyframework.datastore.generated.model.RecordMetadata;
 import com.example.medrecroomdb.R;
 
 import java.io.File;
+import java.time.LocalDateTime;
 
 public class AddRecord extends AppCompatActivity {
 
@@ -143,6 +144,7 @@ public class AddRecord extends AppCompatActivity {
                     .uploaderId(uploaderId)
                     .fileExtension(extension)
                     .patientId(patientId)
+                    .createdOn(LocalDateTime.now().toString())
                     .build();
             Amplify.DataStore.save(
                     item,

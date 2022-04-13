@@ -62,25 +62,8 @@ public class DoctorSearchResultsActivity extends AppCompatActivity {
         tvEmail = findViewById(R.id.tvEmailPatInfo);
         tvMedRecCount = findViewById(R.id.tvMedicalHistoryCount);
 
-        recordMetadatas = new ArrayList<RecordMetadata>();
-
         sharedPreferences = getSharedPreferences("doctorSearchPatient", MODE_PRIVATE);
         idNumber = sharedPreferences.getString("healthCardToSearch", null);
-
-        Amplify.DataStore.query(
-                RecordMetadata.class, Where.matches(RecordMetadata.PATIENT_ID.eq(idNumber)),
-                items -> {
-                    while (items.hasNext()) {
-                        RecordMetadata item = items.next();
-                        recordMetadatas.add(item);
-                        Log.i("Amplify", "Id " + item.getId());
-                    }
-                    runOnUiThread(() -> {
-                        tvMedRecCount.setText("" + recordMetadatas.size());
-                    });
-                },
-                failure -> Log.e("Amplify", "Could not query DataStore", failure)
-        );
 
         Amplify.DataStore.query(User.class, Where.matches(User.ID_NUMBER.eq(idNumber)),
                 goodPosts -> {
@@ -102,12 +85,31 @@ public class DoctorSearchResultsActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        recordMetadatas = new ArrayList<RecordMetadata>();
+        Amplify.DataStore.query(
+                RecordMetadata.class, Where.matches(RecordMetadata.PATIENT_ID.eq(idNumber)),
+                items -> {
+                    while (items.hasNext()) {
+                        RecordMetadata item = items.next();
+                        recordMetadatas.add(item);
+                        Log.i("Amplify", "Id " + item.getId());
+                    }
+                    runOnUiThread(() -> {
+                        tvMedRecCount.setText("" + recordMetadatas.size());
+                    });
+                },
+                failure -> Log.e("Amplify", "Could not query DataStore", failure)
+        );
+    }
+
     public void onViewMedicalRecords(View view){
         Intent medicalRecordsIntent = new Intent(this, ViewMedicalRecords.class);
         startActivity(medicalRecordsIntent);
     }
 }
-
 
 
 

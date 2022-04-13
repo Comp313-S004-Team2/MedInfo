@@ -1,3 +1,14 @@
+type Note @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  recordId: String!
+  note: String!
+  isDoctorOnly: Boolean!
+  writerRole: String!
+  writerName: String!
+  writerId: String!
+  createdOn: String!
+}
+
 type RecordMetadata @model @auth(rules: [{allow: public}]) {
   id: ID!
   title: String!
@@ -7,6 +18,7 @@ type RecordMetadata @model @auth(rules: [{allow: public}]) {
   uploaderId: String!
   fileExtension: String!
   patientId: String!
+  createdOn: String!
 }
 
 type User @model @auth(rules: [{allow: public}]) {

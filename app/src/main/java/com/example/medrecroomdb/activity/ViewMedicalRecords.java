@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.core.model.query.Where;
@@ -43,6 +44,14 @@ public class ViewMedicalRecords extends AppCompatActivity {
         rvViewMedicalRecords.setLayoutManager(new LinearLayoutManager((this)));
 
         Log.i("healthCard", healthCardToSearch);
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        recordMetadatas = new ArrayList<RecordMetadata>();
         Amplify.DataStore.query(
                 RecordMetadata.class, Where.matches(RecordMetadata.PATIENT_ID.eq(healthCardToSearch)),
                 items -> {
@@ -52,13 +61,12 @@ public class ViewMedicalRecords extends AppCompatActivity {
                         Log.i("Amplify", "Id " + item.getId());
                     }
                     runOnUiThread(() -> {
-                        rvMedRecListAdapter = new RVMedRecListAdapter(this, recordMetadatas, "1");
+                        rvMedRecListAdapter = new RVMedRecListAdapter(this, recordMetadatas);
                         rvViewMedicalRecords.setAdapter(rvMedRecListAdapter);
                     });
                 },
                 failure -> Log.e("Amplify", "Could not query DataStore", failure)
         );
-
     }
 
     public void onAddRecord(View view){

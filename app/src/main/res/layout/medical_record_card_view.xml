@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp">
+    android:layout_margin="8dp"
+    android:elevation="8dp">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cvMedicalRecord"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:cardBackgroundColor="#00FFEB3B"
         app:cardCornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,16 +42,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
             <TextView
-                android:id="@+id/textView53"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text="Uploaded By:"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView50" />
-
-            <TextView
                 android:id="@+id/textView54"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,17 +49,7 @@
                 android:layout_marginTop="8dp"
                 android:text="Date of Upload:"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView53" />
-
-            <TextView
-                android:id="@+id/textView55"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text="Doctor's Notes:"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView54" />
+                app:layout_constraintTop_toBottomOf="@+id/tvMedRecDescription" />
 
             <TextView
                 android:id="@+id/tvMedRecId"
@@ -82,57 +63,52 @@
                 android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView55" />
+                app:layout_constraintTop_toBottomOf="@+id/textView54" />
 
             <TextView
                 android:id="@+id/tvMedRecTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:hint="Medical Record Title"
-                android:textStyle="bold|italic"
+                android:textStyle="italic"
                 app:layout_constraintBottom_toBottomOf="@+id/textView33"
-                app:layout_constraintStart_toEndOf="@+id/textView33" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView33"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvMedRecDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:hint="Medical Record Description"
-                android:textStyle="bold|italic"
-                app:layout_constraintBottom_toBottomOf="@+id/textView50"
-                app:layout_constraintStart_toEndOf="@+id/textView50" />
-
-            <TextView
-                android:id="@+id/tvMedRecUploader"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:hint="Medical Record Uploader"
-                android:textStyle="bold|italic"
-                app:layout_constraintBottom_toBottomOf="@+id/textView53"
-                app:layout_constraintStart_toEndOf="@+id/textView53" />
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:hint="Medical Record Description"
+                android:lines="1"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="@+id/textView50"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView50"
+                app:layout_constraintTop_toBottomOf="@+id/tvMedRecTitle" />
 
             <TextView
                 android:id="@+id/tvMedRecUploadDate"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="8dp"
                 android:hint="Medical Record Upload Date"
-                android:textStyle="bold|italic"
+                android:textStyle="italic"
                 app:layout_constraintBottom_toBottomOf="@+id/textView54"
-                app:layout_constraintStart_toEndOf="@+id/textView54" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView54"
+                app:layout_constraintTop_toBottomOf="@+id/tvMedRecDescription" />
 
-            <TextView
-                android:id="@+id/tvMedRecNumberOfNotes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:hint="Number of Doctor's Notes"
-                android:textStyle="bold|italic"
-                app:layout_constraintBottom_toBottomOf="@+id/textView55"
-                app:layout_constraintStart_toEndOf="@+id/textView55" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
