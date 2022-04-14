@@ -42,11 +42,11 @@ public class AddRecord extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_record);
 
-        tvUploader = findViewById(R.id.tvAddRecUploader);
-        tvRole = findViewById(R.id.tvAddRecUploaderRole);
-        etTitle = findViewById(R.id.etAddRecTitle);
-        etDescription = findViewById(R.id.etAddRecDescription);
-        etRecordPath = findViewById(R.id.etAddRecRecordPath);
+        tvUploader = findViewById(R.id.tvEditRecUploader);
+        tvRole = findViewById(R.id.tvEditRecUploaderRole);
+        etTitle = findViewById(R.id.etEditRecTitle);
+        etDescription = findViewById(R.id.etEditRecDescription);
+        etRecordPath = findViewById(R.id.etEditRecRecordPath);
         loginSharedPreferences = getSharedPreferences("loginInfo", MODE_PRIVATE);
         uploaderName = loginSharedPreferences.getString("userName", null);
         uploaderRole = loginSharedPreferences.getString("role", null);

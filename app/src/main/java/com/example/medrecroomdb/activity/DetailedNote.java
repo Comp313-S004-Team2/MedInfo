@@ -30,6 +30,7 @@ public class DetailedNote extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_note);
 
+
         tvCreatedBy = findViewById(R.id.tvDetNotCreatedBy);
         tvCreatedOn = findViewById(R.id.tvDetNotCreatedOn);
         tvRecordId = findViewById(R.id.tvDetNotRecordId);

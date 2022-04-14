@@ -7,20 +7,24 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.core.model.query.Where;
 import com.amplifyframework.datastore.generated.model.Note;
 import com.amplifyframework.datastore.generated.model.RecordMetadata;
+import com.amplifyframework.storage.options.StorageDownloadFileOptions;
 import com.example.medrecroomdb.R;
 import com.example.medrecroomdb.RVNotesListAdapter;
 import com.example.medrecroomdb.model.MedicalRecord;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -162,5 +166,19 @@ public class ViewDetailedRecord extends AppCompatActivity {
             }
         }).show();
         alertDialog.create();
+    }
+    public void onDownload(View view){
+        Amplify.Storage.downloadFile(
+                recordMetadata.getId() + recordMetadata.getFileExtension(),
+                new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/" + recordMetadata.getId() + recordMetadata.getFileExtension()),
+                StorageDownloadFileOptions.defaultInstance(),
+                progress -> Log.i("MyAmplifyApp", "Fraction completed: " + progress.getFractionCompleted()),
+                result -> {
+                    runOnUiThread(() -> {
+                        Toast.makeText(this, "File Downloaded Successfully", Toast.LENGTH_SHORT).show();
+                    });
+                    Log.i("MyAmplifyApp", "Successfully downloaded: " + result.getFile().getName());},
+                error -> Log.e("MyAmplifyApp",  "Download Failure", error)
+        );
     }
 }

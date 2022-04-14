@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedRecRoomDB">
         <activity
+            android:name=".activity.EditRecord"
+            android:exported="false" />
+        <activity
             android:name=".activity.DetailedNote"
             android:exported="false" />
         <activity
