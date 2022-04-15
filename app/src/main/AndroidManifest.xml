@@ -14,6 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedRecRoomDB">
         <activity
+            android:name=".activity.RescheduleAppointment"
+            android:exported="false" />
+        <activity
+            android:name=".activity.Empty"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AppointmentList"
+            android:exported="false" />
+        <activity
             android:name=".activity.EditRecord"
             android:exported="false" />
         <activity

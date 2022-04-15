@@ -137,8 +137,8 @@ public class PatientNavActivity extends AppCompatActivity {
         }*/
     }
 
-    public void onScheduleAppointment(View view){
-        Intent scheduleAppointmentIntent = new Intent(this, DoctorList.class);
+    public void onAppointments(View view){
+        Intent scheduleAppointmentIntent = new Intent(this, AppointmentList.class);
         startActivity(scheduleAppointmentIntent);
     }
 

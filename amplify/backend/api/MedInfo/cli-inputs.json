@@ -3,7 +3,7 @@
   "serviceConfiguration": {
     "apiName": "MedInfo",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/tmp/amplify-b889e7cb-20ae-4159-b1cb-b96671aeb0f4/amplify/backend/api/MedInfo/schema.graphql",
+    "gqlSchemaPath": "/tmp/amplify-1c0b202f-ff47-4e86-82e7-3c034a65c181/amplify/backend/api/MedInfo/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
       "keyDescription": "api key description",

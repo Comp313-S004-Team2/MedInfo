@@ -6,6 +6,8 @@ type Appointment @model @auth(rules: [{allow: public}]) {
   month: Int!
   day: Int!
   timeSlot: Int!
+  patientName: String!
+  doctorName: String!
 }
 
 type Note @model @auth(rules: [{allow: public}]) {

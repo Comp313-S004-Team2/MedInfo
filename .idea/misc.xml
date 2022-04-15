@@ -11,6 +11,7 @@
         <entry key="..\:/Users/DONDON/Downloads/MedInfo/app/src/main/res/layout/activity_add_record.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/DONDON/Downloads/MedInfo/app/src/main/res/layout/activity_add_record2.xml" value="0.5" />
         <entry key="..\:/Users/DONDON/Downloads/MedInfo/app/src/main/res/layout/activity_appointment.xml" value="0.33" />
+        <entry key="..\:/Users/DONDON/Downloads/MedInfo/app/src/main/res/layout/activity_appointment_list.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/DONDON/Downloads/MedInfo/app/src/main/res/layout/activity_detailed_note.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/DONDON/Downloads/MedInfo/app/src/main/res/layout/activity_doctor.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/DONDON/Downloads/MedInfo/app/src/main/res/layout/activity_doctor_card_view.xml" value="0.38333333333333336" />
@@ -18,13 +19,17 @@
         <entry key="..\:/Users/DONDON/Downloads/MedInfo/app/src/main/res/layout/activity_doctor_searchpatient.xml" value="0.33" />
         <entry key="..\:/Users/DONDON/Downloads/MedInfo/app/src/main/res/layout/activity_doctor_searchresults_contraint_layout.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/DONDON/Downloads/MedInfo/app/src/main/res/layout/activity_edit_record.xml" value="0.2" />
+        <entry key="..\:/Users/DONDON/Downloads/MedInfo/app/src/main/res/layout/activity_empty.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/DONDON/Downloads/MedInfo/app/src/main/res/layout/activity_ggallery_avtivity.xml" value="0.22" />
         <entry key="..\:/Users/DONDON/Downloads/MedInfo/app/src/main/res/layout/activity_main.xml" value="0.38333333333333336" />
         <entry key="..\:/Users/DONDON/Downloads/MedInfo/app/src/main/res/layout/activity_note.xml" value="0.33" />
         <entry key="..\:/Users/DONDON/Downloads/MedInfo/app/src/main/res/layout/activity_patient_nav.xml" value="0.38333333333333336" />
+        <entry key="..\:/Users/DONDON/Downloads/MedInfo/app/src/main/res/layout/activity_schedule_appointment.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/DONDON/Downloads/MedInfo/app/src/main/res/layout/activity_sign_up.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/DONDON/Downloads/MedInfo/app/src/main/res/layout/activity_view_detailed_record.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/DONDON/Downloads/MedInfo/app/src/main/res/layout/activity_view_medical_records.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/DONDON/Downloads/MedInfo/app/src/main/res/layout/activity_view_notes.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/DONDON/Downloads/MedInfo/app/src/main/res/layout/appointment_list_card_view.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/DONDON/Downloads/MedInfo/app/src/main/res/layout/doctor_card_view.xml" value="0.38333333333333336" />
         <entry key="..\:/Users/DONDON/Downloads/MedInfo/app/src/main/res/layout/medical_record_card_view.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/DONDON/Downloads/MedInfo/app/src/main/res/layout/notes_card_view.xml" value="0.38697916666666665" />

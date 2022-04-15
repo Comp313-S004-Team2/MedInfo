@@ -32,6 +32,8 @@ public final class Appointment implements Model {
   public static final QueryField MONTH = field("Appointment", "month");
   public static final QueryField DAY = field("Appointment", "day");
   public static final QueryField TIME_SLOT = field("Appointment", "timeSlot");
+  public static final QueryField PATIENT_NAME = field("Appointment", "patientName");
+  public static final QueryField DOCTOR_NAME = field("Appointment", "doctorName");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String patientId;
   private final @ModelField(targetType="String", isRequired = true) String doctorId;
@@ -39,6 +41,8 @@ public final class Appointment implements Model {
   private final @ModelField(targetType="Int", isRequired = true) Integer month;
   private final @ModelField(targetType="Int", isRequired = true) Integer day;
   private final @ModelField(targetType="Int", isRequired = true) Integer timeSlot;
+  private final @ModelField(targetType="String", isRequired = true) String patientName;
+  private final @ModelField(targetType="String", isRequired = true) String doctorName;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String getId() {
@@ -69,6 +73,14 @@ public final class Appointment implements Model {
       return timeSlot;
   }
   
+  public String getPatientName() {
+      return patientName;
+  }
+  
+  public String getDoctorName() {
+      return doctorName;
+  }
+  
   public Temporal.DateTime getCreatedAt() {
       return createdAt;
   }
@@ -77,7 +89,7 @@ public final class Appointment implements Model {
       return updatedAt;
   }
   
-  private Appointment(String id, String patientId, String doctorId, Integer year, Integer month, Integer day, Integer timeSlot) {
+  private Appointment(String id, String patientId, String doctorId, Integer year, Integer month, Integer day, Integer timeSlot, String patientName, String doctorName) {
     this.id = id;
     this.patientId = patientId;
     this.doctorId = doctorId;
@@ -85,6 +97,8 @@ public final class Appointment implements Model {
     this.month = month;
     this.day = day;
     this.timeSlot = timeSlot;
+    this.patientName = patientName;
+    this.doctorName = doctorName;
   }
   
   @Override
@@ -102,6 +116,8 @@ public final class Appointment implements Model {
               ObjectsCompat.equals(getMonth(), appointment.getMonth()) &&
               ObjectsCompat.equals(getDay(), appointment.getDay()) &&
               ObjectsCompat.equals(getTimeSlot(), appointment.getTimeSlot()) &&
+              ObjectsCompat.equals(getPatientName(), appointment.getPatientName()) &&
+              ObjectsCompat.equals(getDoctorName(), appointment.getDoctorName()) &&
               ObjectsCompat.equals(getCreatedAt(), appointment.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), appointment.getUpdatedAt());
       }
@@ -117,6 +133,8 @@ public final class Appointment implements Model {
       .append(getMonth())
       .append(getDay())
       .append(getTimeSlot())
+      .append(getPatientName())
+      .append(getDoctorName())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .toString()
@@ -134,6 +152,8 @@ public final class Appointment implements Model {
       .append("month=" + String.valueOf(getMonth()) + ", ")
       .append("day=" + String.valueOf(getDay()) + ", ")
       .append("timeSlot=" + String.valueOf(getTimeSlot()) + ", ")
+      .append("patientName=" + String.valueOf(getPatientName()) + ", ")
+      .append("doctorName=" + String.valueOf(getDoctorName()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
@@ -160,6 +180,8 @@ public final class Appointment implements Model {
       null,
       null,
       null,
+      null,
+      null,
       null
     );
   }
@@ -171,7 +193,9 @@ public final class Appointment implements Model {
       year,
       month,
       day,
-      timeSlot);
+      timeSlot,
+      patientName,
+      doctorName);
   }
   public interface PatientIdStep {
     DoctorIdStep patientId(String patientId);
@@ -199,7 +223,17 @@ public final class Appointment implements Model {
   
 
   public interface TimeSlotStep {
-    BuildStep timeSlot(Integer timeSlot);
+    PatientNameStep timeSlot(Integer timeSlot);
+  }
+  
+
+  public interface PatientNameStep {
+    DoctorNameStep patientName(String patientName);
+  }
+  
+
+  public interface DoctorNameStep {
+    BuildStep doctorName(String doctorName);
   }
   
 
@@ -209,7 +243,7 @@ public final class Appointment implements Model {
   }
   
 
-  public static class Builder implements PatientIdStep, DoctorIdStep, YearStep, MonthStep, DayStep, TimeSlotStep, BuildStep {
+  public static class Builder implements PatientIdStep, DoctorIdStep, YearStep, MonthStep, DayStep, TimeSlotStep, PatientNameStep, DoctorNameStep, BuildStep {
     private String id;
     private String patientId;
     private String doctorId;
@@ -217,6 +251,8 @@ public final class Appointment implements Model {
     private Integer month;
     private Integer day;
     private Integer timeSlot;
+    private String patientName;
+    private String doctorName;
     @Override
      public Appointment build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -228,7 +264,9 @@ public final class Appointment implements Model {
           year,
           month,
           day,
-          timeSlot);
+          timeSlot,
+          patientName,
+          doctorName);
     }
     
     @Override
@@ -267,9 +305,23 @@ public final class Appointment implements Model {
     }
     
     @Override
-     public BuildStep timeSlot(Integer timeSlot) {
+     public PatientNameStep timeSlot(Integer timeSlot) {
         Objects.requireNonNull(timeSlot);
         this.timeSlot = timeSlot;
+        return this;
+    }
+    
+    @Override
+     public DoctorNameStep patientName(String patientName) {
+        Objects.requireNonNull(patientName);
+        this.patientName = patientName;
+        return this;
+    }
+    
+    @Override
+     public BuildStep doctorName(String doctorName) {
+        Objects.requireNonNull(doctorName);
+        this.doctorName = doctorName;
         return this;
     }
     
@@ -285,14 +337,16 @@ public final class Appointment implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String patientId, String doctorId, Integer year, Integer month, Integer day, Integer timeSlot) {
+    private CopyOfBuilder(String id, String patientId, String doctorId, Integer year, Integer month, Integer day, Integer timeSlot, String patientName, String doctorName) {
       super.id(id);
       super.patientId(patientId)
         .doctorId(doctorId)
         .year(year)
         .month(month)
         .day(day)
-        .timeSlot(timeSlot);
+        .timeSlot(timeSlot)
+        .patientName(patientName)
+        .doctorName(doctorName);
     }
     
     @Override
@@ -323,6 +377,16 @@ public final class Appointment implements Model {
     @Override
      public CopyOfBuilder timeSlot(Integer timeSlot) {
       return (CopyOfBuilder) super.timeSlot(timeSlot);
+    }
+    
+    @Override
+     public CopyOfBuilder patientName(String patientName) {
+      return (CopyOfBuilder) super.patientName(patientName);
+    }
+    
+    @Override
+     public CopyOfBuilder doctorName(String doctorName) {
+      return (CopyOfBuilder) super.doctorName(doctorName);
     }
   }
   

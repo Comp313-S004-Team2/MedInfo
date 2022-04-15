@@ -35,7 +35,7 @@ public class SetAppointment extends AppCompatActivity {
     int year, month, day;
     ArrayList<String> timeSchedule, availableTimeSlots;
     Spinner spnrtimeSlots;
-    String datePattern, doctorForAppointment, patientId;
+    String datePattern, doctorForAppointment, patientId, patientName;
     SharedPreferences doctorListPreference, loginInfoPrefence;
     TextView tvName;
     User doctor;
@@ -76,6 +76,7 @@ public class SetAppointment extends AppCompatActivity {
         doctorListPreference = getSharedPreferences("doctorList", MODE_PRIVATE);
         loginInfoPrefence = getSharedPreferences("loginInfo", MODE_PRIVATE);
         patientId = loginInfoPrefence.getString("idNumber", null);
+        patientName = loginInfoPrefence.getString("userName", null);
         doctorForAppointment = doctorListPreference.getString("doctorForAppointment", null);
         Log.i("Doctors Id", doctorForAppointment);
 
@@ -185,28 +186,33 @@ public class SetAppointment extends AppCompatActivity {
                 }
             }
         });
+        btnSetAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Appointment item = Appointment.builder()
+                        .patientId(patientId)
+                        .doctorId(doctor.getIdNumber())
+                        .year(year)
+                        .month(month)
+                        .day(day)
+                        .timeSlot(timeSchedule.indexOf(spnrtimeSlots.getSelectedItem().toString()))
+                        .patientName(patientName)
+                        .doctorName(doctor.getFirstName() + " " + doctor.getLastName())
+                        .build();
+                Amplify.DataStore.save(
+                        item,
+                        success -> Log.i("Appointment", "Saved item: " + success.item().getId()),
+                        error -> Log.e("Appointment", "Could not save item to DataStore", error)
+                );
+                finish();
+            }
+        });
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-    }
-
-    public void onSetAppointment(View view) {
-        Appointment item = Appointment.builder()
-                .patientId(patientId)
-                .doctorId(doctor.getIdNumber())
-                .year(year)
-                .month(month)
-                .day(day)
-                .timeSlot(timeSchedule.indexOf(spnrtimeSlots.getSelectedItem().toString()))
-                .build();
-        Amplify.DataStore.save(
-                item,
-                success -> Log.i("Appointment", "Saved item: " + success.item().getId()),
-                error -> Log.e("Appointment", "Could not save item to DataStore", error)
-        );
-        finish();
     }
 }
