@@ -38,7 +38,7 @@ public class RVNotesListAdapter extends RecyclerView.Adapter<RVNotesListAdapter.
     @Override
     public void onBindViewHolder(@NonNull RVNotesViewHolder holder, int position) {
         holder.tvCreatedOn.setText(notes.get(position).getCreatedOn());
-        if(notes.get(position).getWriterName().matches("Doctor")){
+        if(notes.get(position).getWriterRole().matches("Doctor")){
             holder.tvCreatedBy.setText("Dr. " + notes.get(position).getWriterName());
         }else{
             holder.tvCreatedBy.setText(notes.get(position).getWriterName());

@@ -2,6 +2,7 @@ package com.example.medrecroomdb.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -25,15 +26,19 @@ public class PatientNavActivity extends AppCompatActivity {
     private Button button_viewMedRec, button_updateInfo, button_bookAppt;
     String userName;
     Integer id;
-    String healthcardNumber;
+    String healthcardNumber, userId;
     Patient patient;
     Button uploadBtnPatient;
     private static Uri mSelectedFileUri = null;
+    SharedPreferences loginInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_nav);
+
+        loginInfo = getSharedPreferences("loginInfo", MODE_PRIVATE);
+        userId = loginInfo.getString("idNumber", null);
 
         /*uploadBtnPatient = (Button) findViewById(R.id.uploadBtnPatient);
         uploadBtnPatient.setOnClickListener(new View.OnClickListener() {
@@ -140,6 +145,15 @@ public class PatientNavActivity extends AppCompatActivity {
     public void onAppointments(View view){
         Intent scheduleAppointmentIntent = new Intent(this, AppointmentList.class);
         startActivity(scheduleAppointmentIntent);
+    }
+
+    public void onViewMedicalRecords(View view){
+        Intent intent = new Intent(this, ViewMedicalRecords.class);
+        SharedPreferences sharedPreferences = getSharedPreferences("doctorSearchPatient", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("healthCardToSearch", userId);
+        editor.commit();
+        startActivity(intent);
     }
 
     private void uploadFile(String Uri){

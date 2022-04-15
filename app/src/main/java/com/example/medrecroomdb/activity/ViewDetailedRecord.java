@@ -30,10 +30,10 @@ import java.util.ArrayList;
 
 public class ViewDetailedRecord extends AppCompatActivity {
 
-    String medRecId, userId;
+    String medRecId, userId, userRole;
     RecordMetadata recordMetadata;
     TextView tvTitle, tvDescription, tvUploader, tvUploadDate, tvNumberOfNotes, tvRecordId;
-    SharedPreferences viewMedRecPreference, loginInfoPreference;
+    SharedPreferences viewMedRecPreference, loginInfoPreference, detailedRecordPreference;
     ArrayList<Note> notes;
     Button btnEdit, btnDelete;
 
@@ -47,6 +47,7 @@ public class ViewDetailedRecord extends AppCompatActivity {
         loginInfoPreference = getSharedPreferences("loginInfo", MODE_PRIVATE);
         medRecId = viewMedRecPreference.getString("recordToView", null);
         userId = loginInfoPreference.getString("idNumber", null);
+        userRole = loginInfoPreference.getString("role", null);
 
         notes = new ArrayList<Note>();
 
@@ -68,20 +69,38 @@ public class ViewDetailedRecord extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         notes = new ArrayList<Note>();
-        Amplify.DataStore.query(
-                Note.class, Where.matches(Note.RECORD_ID.eq(medRecId)),
-                items -> {
-                    while (items.hasNext()) {
-                        Note item = items.next();
-                        notes.add(item);
-                        Log.i("Query Success", "Id " + item.getId());
-                    }
-                    runOnUiThread(() -> {
-                        tvNumberOfNotes.setText("" + notes.size());
-                    });
-                },
-                failure -> Log.e("Amplify", "Could not query DataStore", failure)
-        );
+        if(userRole.matches("Patient")){
+            Amplify.DataStore.query(
+                    Note.class, Where.matches(Note.RECORD_ID.eq(medRecId).and(Note.IS_DOCTOR_ONLY.eq(false))),
+                    items -> {
+                        while (items.hasNext()) {
+                            Note item = items.next();
+                            notes.add(item);
+                            Log.i("Query Success", "Id " + item.getId());
+                        }
+                        runOnUiThread(() -> {
+                            tvNumberOfNotes.setText("" + notes.size());
+                        });
+                    },
+                    failure -> Log.e("Amplify", "Could not query DataStore", failure)
+            );
+        }else {
+            Amplify.DataStore.query(
+                    Note.class, Where.matches(Note.RECORD_ID.eq(medRecId)),
+                    items -> {
+                        while (items.hasNext()) {
+                            Note item = items.next();
+                            notes.add(item);
+                            Log.i("Query Success", "Id " + item.getId());
+                        }
+                        runOnUiThread(() -> {
+                            tvNumberOfNotes.setText("" + notes.size());
+                        });
+                    },
+                    failure -> Log.e("Amplify", "Could not query DataStore", failure)
+            );
+        }
+
 
         Amplify.DataStore.query(
                 RecordMetadata.class, Where.matches(RecordMetadata.ID.eq(medRecId)),
@@ -112,6 +131,14 @@ public class ViewDetailedRecord extends AppCompatActivity {
     }
 
     public void onEdit(View view){
+
+        detailedRecordPreference = getSharedPreferences("detailedRecord", MODE_PRIVATE);
+        SharedPreferences.Editor editor = detailedRecordPreference.edit();
+        editor.putString("recordToEdit", recordMetadata.getId());
+        editor.commit();
+        Intent intent = new Intent(this, EditRecord.class);
+        startActivity(intent);
+        finish();
 
     }
     public void onDelete(View view){

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,7 +23,7 @@ public class DetailedNote extends AppCompatActivity {
 
     TextView tvCreatedBy, tvCreatedOn, tvRecordId, tvIsDoctorOnly, tvNote;
     Button btnEdit, btnDelete;
-    SharedPreferences notesListPreference, loginPreference;
+    SharedPreferences notesListPreference, loginPreference, detailedNotePreference;
     String noteToView, userName, userRole, userId;
 
     @Override
@@ -84,7 +85,13 @@ public class DetailedNote extends AppCompatActivity {
         finish();
     }
     public void onEdit(View view){
-
+        detailedNotePreference = getSharedPreferences("detailedNote", MODE_PRIVATE);
+        SharedPreferences.Editor editor = detailedNotePreference.edit();
+        editor.putString("noteToEdit", noteToView);
+        editor.commit();
+        Intent intent = new Intent(this, EditNote.class);
+        startActivity(intent);
+        finish();
     }
     public void onDelete(View view){
 

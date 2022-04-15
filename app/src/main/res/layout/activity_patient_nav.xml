@@ -28,6 +28,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="@dimen/top_padding"
         android:layout_marginEnd="32dp"
+        android:onClick="onViewMedicalRecords"
         android:text="@string/lbl_ViewMedicalRecords"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
