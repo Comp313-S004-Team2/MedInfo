@@ -25,7 +25,7 @@ public class AppointmentList extends AppCompatActivity {
     RecyclerView rvAppointmentList;
     RVAppointmentListAdapter rvAppointmentListAdapter;
     SharedPreferences loginInfoPreference;
-    String patientId;
+    String idNumber, userRole;
     ArrayList<Appointment> appointments;
 
     @Override
@@ -38,7 +38,8 @@ public class AppointmentList extends AppCompatActivity {
         rvAppointmentList.setLayoutManager(new LinearLayoutManager(this));
 
         loginInfoPreference = getSharedPreferences("loginInfo", MODE_PRIVATE);
-        patientId = loginInfoPreference.getString("idNumber", null);
+        idNumber = loginInfoPreference.getString("idNumber", null);
+        userRole = loginInfoPreference.getString("role", null);
 
     }
 
@@ -47,28 +48,54 @@ public class AppointmentList extends AppCompatActivity {
         super.onResume();
         appointments = new ArrayList<Appointment>();
         Calendar dateToday = Calendar.getInstance();
-        Amplify.DataStore.query(
-                Appointment.class, Where.matches(Appointment.PATIENT_ID.eq(patientId)),
-                items -> {
-                    while (items.hasNext()) {
+        if(userRole.matches("Patient")){
+            Amplify.DataStore.query(
+                    Appointment.class, Where.matches(Appointment.PATIENT_ID.eq(idNumber)),
+                    items -> {
+                        while (items.hasNext()) {
 
-                        Appointment item = items.next();
-                        Calendar appointmentDate = Calendar.getInstance();
-                        appointmentDate.set(item.getYear(), item.getMonth(), item.getDay());
-                        if(dateToday.before(appointmentDate)){
-                            appointments.add(item);
+                            Appointment item = items.next();
+                            Calendar appointmentDate = Calendar.getInstance();
+                            appointmentDate.set(item.getYear(), item.getMonth(), item.getDay());
+                            if(dateToday.before(appointmentDate)){
+                                appointments.add(item);
+                            }
+                            Log.i("Appointment", "Id " + item.getId());
                         }
-                        Log.i("Appointment", "Id " + item.getId());
-                    }
-                    runOnUiThread(() -> {
-                        rvAppointmentListAdapter = new RVAppointmentListAdapter(this, appointments);
-                        rvAppointmentList.setAdapter(rvAppointmentListAdapter);
-                    });
+                        runOnUiThread(() -> {
+                            rvAppointmentListAdapter = new RVAppointmentListAdapter(this, appointments, userRole);
+                            rvAppointmentList.setAdapter(rvAppointmentListAdapter);
+                        });
 
 
-                },
-                failure -> Log.e("Appointment", "Could not query DataStore", failure)
-        );
+                    },
+                    failure -> Log.e("Appointment", "Could not query DataStore", failure)
+            );
+        }else if(userRole.matches("Doctor")){
+            Amplify.DataStore.query(
+                    Appointment.class, Where.matches(Appointment.DOCTOR_ID.eq(idNumber)),
+                    items -> {
+                        while (items.hasNext()) {
+
+                            Appointment item = items.next();
+                            Calendar appointmentDate = Calendar.getInstance();
+                            appointmentDate.set(item.getYear(), item.getMonth(), item.getDay());
+                            if(dateToday.before(appointmentDate)){
+                                appointments.add(item);
+                            }
+                            Log.i("Appointment", "Id " + item.getId());
+                        }
+                        runOnUiThread(() -> {
+                            rvAppointmentListAdapter = new RVAppointmentListAdapter(this, appointments, userRole);
+                            rvAppointmentList.setAdapter(rvAppointmentListAdapter);
+                        });
+
+
+                    },
+                    failure -> Log.e("Appointment", "Could not query DataStore", failure)
+            );
+        }
+
     }
 
     public void onScheduleAppointment(View view){

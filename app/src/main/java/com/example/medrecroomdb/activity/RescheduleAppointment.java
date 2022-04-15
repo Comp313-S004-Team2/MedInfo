@@ -39,7 +39,6 @@ public class RescheduleAppointment extends AppCompatActivity {
     ArrayList<String> timeSchedule, availableTimeSlots;
     ArrayAdapter<String> adapter;
     ArrayList<Appointment> appointments;
-    User doctor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

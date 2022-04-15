@@ -42,10 +42,12 @@ public class RVAppointmentListAdapter extends RecyclerView.Adapter<RVAppointment
     ArrayList<String> weeks;
     ArrayList<String> months;
     List<String> timeSlot;
+    private String userRole;
 
-    public RVAppointmentListAdapter(Context context, ArrayList<Appointment> appointments) {
+    public RVAppointmentListAdapter(Context context, ArrayList<Appointment> appointments, String userRole) {
         this.context = context;
         this.appointments = appointments;
+        this.userRole = userRole;
         getAppointmentDate = Calendar.getInstance();
         sdf = new SimpleDateFormat("E, MMMM dd yyyy");
         weeks = new ArrayList<String>();
@@ -89,6 +91,13 @@ public class RVAppointmentListAdapter extends RecyclerView.Adapter<RVAppointment
                 + getAppointmentDate.get(Calendar.YEAR) + " "
                 + timeSlot.get(appointments.get(position).getTimeSlot()));
         holder.tvDoctorName.setText(appointments.get(position).getDoctorName());
+
+        if(userRole.matches("Doctor")){
+            holder.btnReschedule.setVisibility(View.INVISIBLE);
+            holder.tvLabel.setText("Patient's Name:");
+            holder.tvDoctorName.setText(appointments.get(position).getPatientName());
+        }
+
         holder.btnReschedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -144,7 +153,7 @@ public class RVAppointmentListAdapter extends RecyclerView.Adapter<RVAppointment
 
     public class AppointmentListViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvDoctorName, tvSchedule;
+        TextView tvDoctorName, tvSchedule, tvLabel;
         CardView cvAppointment;
         Button btnReschedule, btnCancel;
 
@@ -155,7 +164,7 @@ public class RVAppointmentListAdapter extends RecyclerView.Adapter<RVAppointment
             cvAppointment = itemView.findViewById(R.id.cvAppointment);
             btnCancel = itemView.findViewById(R.id.btnAppListCancel);
             btnReschedule = itemView.findViewById(R.id.btnAppListReschedule);
-
+            tvLabel = itemView.findViewById(R.id.tvAppListLabel);
         }
     }
 }

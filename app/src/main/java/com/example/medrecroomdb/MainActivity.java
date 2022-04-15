@@ -32,6 +32,7 @@ import com.amplifyframework.datastore.generated.model.User;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 import com.example.medrecroomdb.activity.AdminActivity;
 import com.example.medrecroomdb.activity.DoctorActivity;
+import com.example.medrecroomdb.activity.DoctorNav;
 import com.example.medrecroomdb.activity.PatientActivity;
 import com.example.medrecroomdb.activity.DoctorSearchPatientActivity;
 import com.example.medrecroomdb.activity.AdminSearchUserActivity;
@@ -137,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                     editor.putString("userName", user.getFirstName() + " " + user.getLastName());
                                     editor.commit();
                                     if(user.getRole().matches("Doctor") ) {
-                                        Intent intentDoctor = new Intent(v.getContext(), DoctorSearchPatientActivity.class);
+                                        Intent intentDoctor = new Intent(v.getContext(), DoctorNav.class);
                                         intentDoctor.putExtra("UserId", user.getIdNumber());
                                         intentDoctor.putExtra("Role", user.getRole());
                                         startActivity(intentDoctor);
