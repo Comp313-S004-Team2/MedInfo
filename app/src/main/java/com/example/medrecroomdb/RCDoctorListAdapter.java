@@ -1,7 +1,9 @@
 package com.example.medrecroomdb;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +14,14 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.datastore.generated.model.User;
-import com.example.medrecroomdb.activity.Appointment;
+import com.example.medrecroomdb.activity.SetAppointment;
 
 import java.util.ArrayList;
 
 public class RCDoctorListAdapter extends RecyclerView.Adapter<RCDoctorListAdapter.DoctorListViewHolder> {
     private ArrayList<User> doctors;
     private Context context;
+    SharedPreferences sharedPreferences;
 
     public RCDoctorListAdapter(ArrayList<User> doctors, Context context) {
         this.doctors = doctors;
@@ -39,8 +42,13 @@ public class RCDoctorListAdapter extends RecyclerView.Adapter<RCDoctorListAdapte
         holder.email.setText(doctors.get(position).getEmail());
         holder.phone.setText(doctors.get(position).getPhoneNumber());
         holder.doctorCardView.setOnClickListener(v -> {
-            Intent setAppointmentIntent = new Intent(context, Appointment.class);
+            Intent setAppointmentIntent = new Intent(context, SetAppointment.class);
+            sharedPreferences = context.getSharedPreferences("doctorList", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("doctorForAppointment", doctors.get(position).getIdNumber());
+            editor.commit();
             context.startActivity(setAppointmentIntent);
+            ((Activity)context).finish();
         });
     }
 

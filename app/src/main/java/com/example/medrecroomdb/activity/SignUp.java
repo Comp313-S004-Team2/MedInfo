@@ -18,6 +18,8 @@ import com.amplifyframework.core.model.query.Where;
 import com.amplifyframework.datastore.generated.model.User;
 import com.example.medrecroomdb.R;
 
+import java.util.ArrayList;
+
 public class SignUp extends AppCompatActivity {
 
     Spinner spinnerRole;

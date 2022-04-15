@@ -38,7 +38,7 @@
             android:name=".activity.ViewMedicalRecords"
             android:exported="false" />
         <activity
-            android:name=".activity.Appointment"
+            android:name=".activity.SetAppointment"
             android:exported="false" />
         <activity
             android:name=".activity.DoctorList"

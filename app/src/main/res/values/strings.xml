@@ -13,6 +13,25 @@
         <item>Doctor</item>
         <item>Medical Staff</item>
     </string-array>
+
+    <string-array name="timeSelection">
+        <item>8:00 AM</item>
+        <item>8:30 AM</item>
+        <item>9:00 AM</item>
+        <item>9:30 AM</item>
+        <item>10:00 AM</item>
+        <item>10:30 AM</item>
+        <item>11:00 AM</item>
+        <item>11:30 AM</item>
+        <item>1:00 PM</item>
+        <item>1:30 PM</item>
+        <item>2:00 PM</item>
+        <item>2:30 PM</item>
+        <item>3:00 PM</item>
+        <item>4:00 PM</item>
+        <item>4:30 PM</item>
+    </string-array>
+
     <string name="title_activity_gallery">GalleryActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
