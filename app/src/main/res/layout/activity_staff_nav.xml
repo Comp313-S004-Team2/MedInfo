@@ -4,47 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/linearLayout">
-
+    tools:context=".activity.StaffNav">
 
     <Button
-        android:id="@+id/btn_schedule"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:onClick="onAppointments"
-        android:text="Appointments"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_updateInfo" />
-
-    <Button
-        android:id="@+id/btn_viewMedicalRecord"
+        android:id="@+id/button10"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="150dp"
         android:layout_marginEnd="32dp"
-        android:onClick="onViewMedicalRecords"
-        android:text="Medical Records"
+        android:onClick="onSearchPatient"
+        android:text="Search Patient"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Search Patient" />
 
     <Button
-        android:id="@+id/btn_updateInfo"
+        android:id="@+id/button11"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:text="@string/lbl_UpdatePersonalInformation"
+        android:onClick="onMedicalRecords"
+        android:text="Uploaded Records"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_viewMedicalRecord" />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/button10" />
 </androidx.constraintlayout.widget.ConstraintLayout>

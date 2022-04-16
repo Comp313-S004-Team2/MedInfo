@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedRecRoomDB">
         <activity
+            android:name=".activity.StaffNav"
+            android:exported="false" />
+        <activity
             android:name=".activity.EditNote"
             android:exported="false" />
         <activity

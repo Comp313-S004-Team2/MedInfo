@@ -38,6 +38,7 @@ import com.example.medrecroomdb.activity.DoctorSearchPatientActivity;
 import com.example.medrecroomdb.activity.AdminSearchUserActivity;
 import com.example.medrecroomdb.activity.PatientNavActivity;
 import com.example.medrecroomdb.activity.SignUp;
+import com.example.medrecroomdb.activity.StaffNav;
 import com.example.medrecroomdb.model.Admin;
 //import com.example.medrecroomdb.model.Doctor;
 import com.example.medrecroomdb.model.Patient;
@@ -148,6 +149,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                         intentDoctor.putExtra("UserId", user.getIdNumber());
                                         intentDoctor.putExtra("Role", user.getRole());
                                         startActivity(intentDoctor);
+                                        finish();
+                                    }else if(user.getRole().matches("Medical Staff")){
+                                        Intent intentStaff = new Intent(v.getContext(), StaffNav.class);
+                                        startActivity(intentStaff);
                                         finish();
                                     }
                                 }else{
